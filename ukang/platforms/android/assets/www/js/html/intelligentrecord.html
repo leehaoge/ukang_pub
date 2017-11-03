@@ -1,0 +1,24 @@
+<div data-role="tabs" id="pc_tabs">
+    <div data-role="navbar">
+        <ul id="ir_tab_ul">
+            <li><a href="#ir_one" data-ajax="false" class="ui-btn-active">UBOX</a></li>
+            <li><a href="#ir_two" data-ajax="false">智能录入</a></li>
+            <li><a href="#ir_three" data-ajax="false">手动录入</a></li>
+        </ul>
+    </div>
+    <div id="ir_one" class="ir_frame auto-scroll">
+        <div>
+            <img src="img/ir-01.png" class="full-w-image">
+        </div>
+    </div>
+    <div id="ir_two" class="ir_frame auto-scroll">
+        <ul id="intelligen_records" data-role="listview">
+            <%=irecord_list%>
+        </ul>            
+    </div>
+    <div id="ir_three" class="ir_frame auto-scroll">
+        <div id="all_manual_records">
+            <%=minput_list%>
+        </div>
+    </div>
+</div>
