@@ -1,0 +1,66 @@
+<div class="uk-module-frame">
+    <div class="ui-grid-b">
+        <div class="ui-block-a">
+            <a id="ln-hc-main" href="#" class="uk-link-1">&lt;返回</a>
+        </div>
+        <div class="ui-block-b text-center uk-frame-title">
+            <%=dataName%>
+        </div>
+        <div class="ui-block-c text-right">
+            <a href="#" class="uk-link-1">＋</a>
+        </div>
+
+    </div>
+    <div class="sep_v_5"></div>
+    <div class="ui-grid-c ui-corner-all uk-thin-border-red uk-data-period">
+        <div class="ui-block-a text-center uk-period-block uk-data-period-selected">日
+        </div>
+        <div class="ui-block-b text-center uk-period-block uk-period-block-border">周
+        </div>
+        <div class="ui-block-c text-center uk-period-block uk-period-block-border">月
+        </div>
+        <div class="ui-block-d text-center uk-period-block uk-period-block-border">年
+        </div>
+
+    </div>
+    <div class="sep_v_5"></div>
+    <div class="ui-body-a ui-corner-all">
+        <canvas class="uk-data-chart"></canvas>
+    </div>
+    <div class="sep_v_5"></div>
+    <!--
+    <div class="border-bottom-grey">
+        <div class="uk-right-op">
+            <select data-role="slider" data-mini="true">
+                <option value="off" selected></option>
+                <option value="on"></option>
+            </select>
+        </div>
+        <div class="uk-with-right-op">添加到个人收藏</div>
+    </div> -->
+    <div>
+        <ul data-role="listview" data-inset="true">
+            <li data-icon="false">
+                <a href="#">添加到个人收藏
+                    <div class="uk-right-op text-right">
+                        <select data-role="slider" data-mini="true">
+                            <option value="off" selected></option>
+                            <option value="on"></option>
+                        </select>
+                    </div>
+                </a>
+                <!-- <div class="uk-with-right-op">添加到个人收藏</div> -->
+            </li>
+            <li>
+                <a href="#">显示所有数据
+                    <p class="ui-li-aside"></p>
+                </a>
+            </li>
+            <li>
+                <a href="#">单位
+                    <p class="ui-li-aside">公斤</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

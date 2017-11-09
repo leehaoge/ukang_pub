@@ -1,0 +1,30 @@
+{
+  "name": "com.lec.u_kang",
+  "displayName": "U康",
+  "version": "0.2.0",
+  "description": "U康健康平台",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lanny Lee",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "chart.js": "^2.7.1",
+    "cordova-android": "^6.3.0",
+    "cordova-plugin-whitelist": "^1.3.2",
+    "cordova-sqlite-storage": "Cordova-sqlite-storage"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-whitelist": {},
+      "cordova-sqlite-storage": {}
+    },
+    "platforms": [
+      "android"
+    ]
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
