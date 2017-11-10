@@ -3934,7 +3934,7 @@ div.ui-slider-switch:after {
 	clear: none;
 }
 div.ui-slider-switch.ui-mini {
-	height: 20px;
+	height: 21px;
 	top: 0;
 }
 .ui-slider-inneroffset {
@@ -3950,7 +3950,7 @@ div.ui-slider-switch.ui-mini {
 }
 .ui-slider-switch.ui-mini .ui-slider-handle {
 	width: 20px;
-	height: 16px;
+	height: 18px;
 	margin: 1px 0 0 -7px;
 	padding: 0;
 }
