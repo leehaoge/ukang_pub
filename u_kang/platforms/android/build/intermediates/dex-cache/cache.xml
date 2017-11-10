@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="E:\ukang\dev\u_kang\platforms\android\libs\sqlite-connector.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.0"
+        sha1="76169ab23a4f939925491c6fe186749da5a56ee9">
+        <dex dex="E:\ukang\dev\u_kang\platforms\android\build\intermediates\pre-dexed\debug\sqlite-connector_23a805b243fd9a9ad12ebc39be8e37b7f77d7e05.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\ukang\dev\u_kang\platforms\android\build\intermediates\exploded-aar\org.apache.cordova\CordovaLib\6.3.0\debug\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.0"
+        sha1="90c24c7c7717de951b29e0777c6cfd206e052684">
+        <dex dex="E:\ukang\dev\u_kang\platforms\android\build\intermediates\pre-dexed\debug\CordovaLib-6.3.0-debug_6684aac2b78d17f9ad1e56c65e06f16f89a40c30.jar" />
+    </item>
+
+</items>
