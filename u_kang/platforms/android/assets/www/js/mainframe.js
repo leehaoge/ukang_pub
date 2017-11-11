@@ -48,6 +48,7 @@ define(['core/context', 'core/fragment', 'modules'], function (context, Fragment
                     // $(aModule.el).trigger('create');
                     if (aModule.afterLoad && $.isFunction(aModule.afterLoad)) aModule.afterLoad();
                 }
+                context['current_module'] = aModule;                
                 $(aModule.el).removeClass('hidden');
             }
         };

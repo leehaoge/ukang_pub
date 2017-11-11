@@ -39,9 +39,74 @@ define(['core/context'], function(context) {
     context['app'].winWidth = winWidth;
     context['app'].winHeight = winHeight;
     
+    var DomUtil;
+    
+    (function(DomUtil) {
+    
+        function __getClass(object){
+            return Object.prototype.toString.call(object).match(/^\[object\s(.*)\]$/)[1];
+        };
+    
+        function _set(el, v) {
+            if (el && v != undefined) {
+                var clz = __getClass(v);
+                if (clz == 'Object') {
+                    var $el = $(el);
+                    for (var i in v) {
+                        var val = v[i],
+                            cond = '[data-id="' + i +'"]';
+                        $el.find(cond).each(function() {
+                            _set(this, val);
+                        });
+                    }
+                } else
+                //TODO handle Date
+                if (clz == 'Number' || clz=='String'){
+                    v = '' + v;
+                    var nodeName = el.nodeName;
+                    if (nodeName == 'INPUT' || nodeName == 'SELECT') {
+                        $(el).val(v);
+                    } else
+                    if (nodeName == 'DIV' || nodeName == 'SPAN') {
+                        $(el).html(v);
+                    }
+                }
+            }
+        }
+    
+        function _get(el) {
+            var v = {},
+                $el = $(el);
+            $el.find('[data-id]').each(function() {
+                var $this = $(this), nName = this.nodeName, d_id = $this.attr('data-id');
+                if (d_id) {
+                    if (nName == 'DIV' || nName == 'SPAN') {
+                        v[d_id] = $this.html();
+                    } else
+                    if (nName == 'INPUT' || nName == 'SELECT') {
+                        v[d_id] = $this.val();
+                    }
+                }
+            });
+            return v;
+        }
+    
+        //TODO getValue
+    
+        /**
+         *
+         * @type {_set}
+         */
+        DomUtil.setValue = _set;
+        DomUtil.getValue = _get;
+    
+        return DomUtil;
+    })(DomUtil || (DomUtil = {}));
+
     var module = {
         __extends: __extends,
         __define: __define,
+        DomUtil: DomUtil
     };
 
     return module;

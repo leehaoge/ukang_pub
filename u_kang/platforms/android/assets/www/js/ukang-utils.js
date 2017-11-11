@@ -23,6 +23,8 @@ define(['core/date-utils', 'ukang-constants'], function (DateUtils, CONSTS) {
                 } else
                 if (DateUtils.sameYear(sampleDate, now)) {
                     ret.kind = CONSTS.DT_SAMEYEAR;
+                } else {
+                    ret.d = DateUtils.format(sampleDate, 'yy/MM/dd')
                 }
             }
 

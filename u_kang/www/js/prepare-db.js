@@ -50,6 +50,7 @@ define(['ukang-sqlite', 'core/sqlite-utils', 'ukang-constants', 'core/context'],
                     ['INSERT INTO ' + tbName + ' VALUES (?,?,?)', ['CONTENT', '含量', 'MMOL/L']],
                     ['INSERT INTO ' + tbName + ' VALUES (?,?,?)', ['RATE', '速率', 'CPM']],
                     ['INSERT INTO ' + tbName + ' VALUES (?,?,?)', ['TIMELONG', '时长', 'HOUR']],
+                    ['INSERT INTO ' + tbName + ' VALUES (?,?,?)', ['TEMPERATURE', '温度', 'DEGREE_C']],
                 ], function () {
                     console.log('“基本数据类型”表[' + tbName + ']创建成功！');
                     executeCallback(onSuccess);
@@ -77,6 +78,8 @@ define(['ukang-sqlite', 'core/sqlite-utils', 'ukang-constants', 'core/context'],
                     ['INSERT INTO ' + tbName + ' VALUES (?,?,?,?)', ['HOUR', 'TIMELONG', '小时', 'linear(1)']],
                     ['INSERT INTO ' + tbName + ' VALUES (?,?,?,?)', ['MINUTE', 'TIMELONG', '分钟', 'linear(1/60)']],
                     ['INSERT INTO ' + tbName + ' VALUES (?,?,?,?)', ['SEC', 'TIMELONG', '秒', 'linear(1/60/60)']],
+                    ['INSERT INTO ' + tbName + ' VALUES (?,?,?,?)', ['DEGREE_C', 'TEMPERATURE', '℃', 'linear(1)']],
+                    ['INSERT INTO ' + tbName + ' VALUES (?,?,?,?)', ['DEGREE_F', 'TEMPERATURE', '℉', 'linear(9/5)+32']],
                 ], function () {
                     console.log('“数据单位”表[' + tbName + ']创建成功！');
                     executeCallback(onSuccess);
@@ -108,6 +111,7 @@ define(['ukang-sqlite', 'core/sqlite-utils', 'ukang-constants', 'core/context'],
                     ['INSERT INTO ' + tbName + ' VALUES (?,?,?,?)', ['体脂率', 'PERCENT', 'PERCENT', 'single']],
                     ['INSERT INTO ' + tbName + ' VALUES (?,?,?,?)', ['脱脂体重', 'WEIGHT', 'KG', 'single']],
                     ['INSERT INTO ' + tbName + ' VALUES (?,?,?,?)', ['睡眠', 'TIMELONG', 'HOUR', 'single']],
+                    ['INSERT INTO ' + tbName + ' VALUES (?,?,?,?)', ['体温', 'TEMPERATURE', 'DEGREE_C', 'single']],
                 ], function () {
                     console.log('“健康数据类型”表[' + tbName + ']创建成功！');
                     executeCallback(onSuccess);

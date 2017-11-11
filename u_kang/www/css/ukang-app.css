@@ -304,3 +304,27 @@
 .border-bottom-grey {
     border-bottom: solid 1px grey;
 }
+
+.uk-flat-input {
+    border: none;
+    outline: none;
+    background-color: none;
+} 
+
+.uk-mini-input {
+    height: 20px;
+    line-height: 18px;
+    max-width: 95%;
+}
+
+#nodata-pane {
+    min-height: 300px;
+}
+
+.uk-nodata-0 {
+    width: auto;
+    height: auto;
+    margin-top: 45%;
+    font-size: 16px;
+    color: #666666;
+}

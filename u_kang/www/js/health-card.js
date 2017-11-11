@@ -1,5 +1,5 @@
-define(['text!html/healthcard.html', 'ukang-app', 'core/fragment', 'core/base-module', 'data-page'],
-    function (tpl, ukApp, Fragment, BaseModule, dataPage) {
+define(['text!html/healthcard.html', 'ukang-app', 'core/fragment', 'core/base-module', 'data-page', 'data-list'],
+    function (tpl, ukApp, Fragment, BaseModule, dataPage, dataList) {
         'use strict';
 
         const tplGroup = '\
@@ -58,7 +58,8 @@ define(['text!html/healthcard.html', 'ukang-app', 'core/fragment', 'core/base-mo
                     $this = $(this),
                     dataName = $this.attr('data-id');
                 if (dataName && module.el) {
-                    dataPage.show(module.el, dataName);
+                    module.config.dataName = dataName;
+                    module.navigate("data-page");
                 }
             };
             $('.uk-data-link').click(intoDataView);
@@ -90,15 +91,25 @@ define(['text!html/healthcard.html', 'ukang-app', 'core/fragment', 'core/base-mo
                     }
                 }
                 hcFragment.load(infoContent, {}, setDataLinks);
+                $(hcEl).trigger('create');
             },
             loaded = function () {
                 ukApp.get('highlights', null, onHighlightData);
+            },
+            pages = {
+                "data-page": function() {
+                    dataPage.show(module.el, module.config.dataName);
+                },
+                "data-list": function() {
+                    dataList.show(module.el, module.config.dataName);
+                }
             };
 
 
         $.extend(module, {
             tpl: tpl,
             config: {},
+            pages: pages,
             onloaded: loaded
         });
 

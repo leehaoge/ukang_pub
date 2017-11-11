@@ -1,8 +1,7 @@
-define(['core/core', 'core/fragment'], function(CORE, Fragment) {
+define(['core/core', 'core/fragment', 'core/context'], function(CORE, Fragment, context) {
     'use strict';
 
     var BaseModule = function () {
-
     };
 
     var d=CORE.__define,c=BaseModule,p=c.prototype;
@@ -21,6 +20,7 @@ define(['core/core', 'core/fragment'], function(CORE, Fragment) {
                 self.config = config;
                 self.onloaded = loaded;    
                 self.loaded = true;
+                context['current_module'] = self;
                 if (loaded && $.isFunction(loaded)) loaded();
                 $(self.el).trigger('create');
             });
@@ -34,6 +34,19 @@ define(['core/core', 'core/fragment'], function(CORE, Fragment) {
             this.load(this.tpl, this.config, this.onloaded);
         }        
     };
+
+    p.navigate = function (page) {
+        if (page == "") this.reload();
+        else {
+            this.pages = this.pages || {};
+            if (this.pages[page] && $.isFunction(this.pages[page])) {
+                var args = arguments;
+                Array.prototype.shift.apply(args);
+                this.pages[page].apply(null, args);
+            }
+        }
+    };
+
 
     return BaseModule;
     

@@ -1,0 +1,31 @@
+<div class="uk-module-frame">
+    <div class="ui-grid-b">
+        <div class="ui-block-a">
+            <a id="ln-to-data" href="#" class="uk-link-1">&lt;
+                <%=dataName%>
+            </a>
+        </div>
+        <div class="ui-block-b text-center uk-frame-title">
+            所有已记录的数据
+        </div>
+        <div class="ui-block-c text-right">
+            <a id="ln-datalist-edit" href="#" class="uk-link-1">编辑</a>
+        </div>
+
+    </div>
+
+    <div class="sep_v_10"></div>
+
+    <div id="nodata-pane" class="hidden">
+        <div class="uk-nodata-0 center-text">
+            无数据
+        </div>
+    </div>
+    <div id="datalist-pane" class="hidden">
+            <div><%=unitDisp%></div>
+            <div class="sep_v_5"></div>
+            <ul id="datalist-ul" data-role="listview">
+
+        </ul>
+    </div>
+</div>

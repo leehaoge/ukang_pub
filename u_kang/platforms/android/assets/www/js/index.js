@@ -28,6 +28,8 @@ require.config({
 
 
 var app = {
+    inDevice: false,
+
     // Application Constructor
     initialize: function() {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
@@ -39,6 +41,7 @@ var app = {
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
+        this.inDevice = true;
         this.receivedEvent('deviceready');
     },
 

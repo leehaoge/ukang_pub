@@ -6,6 +6,7 @@ define(['core/context', 'ukang-app', 'mainframe', 'text!html/mainframe.html'],
         context['app'] = context['app'] || {};
         context['app'].navbarHeight = 63;
 
+
         ukApp.initialize();
 
         function loadMainFrame() {

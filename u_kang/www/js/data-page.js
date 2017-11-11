@@ -1,5 +1,5 @@
-define(['text!html/datapage.html', 'core/fragment', 'core/context', 'ukang-app', 'chart'],
-    function (tpl, Fragment, context, ukApp, Chart) {
+define(['text!html/datapage.html', 'core/fragment', 'ukang-app', 'chart', 'pop-page'],
+    function (tpl, Fragment, ukApp, Chart, popPage) {
         'use strict';
 
         // var chartData = {
@@ -22,63 +22,80 @@ define(['text!html/datapage.html', 'core/fragment', 'core/context', 'ukang-app',
         //     ]
         // };
 
-        var dataPage = {
-            config: {
+        var pageEl,
+            config = {
                 dataName: ''
             },
-            onLayoutLoaded: function () {
-                var self = this;
-                $('#ln-hc-main').click(function () {
-                    var modules = context['app']['modules'];
-                    if (modules && modules['healthCard']) {
-                        modules['healthCard'].reload();
-                    }
-                });
+            dataPage = {
+                onLayoutLoaded: function () {
+                    var self = this,
+                        appModule = ukApp.currentModule();
+                    $('#ln-hc-main').click(function () {
+                        appModule.navigate("");
+                    });
 
-                ukApp.get('collectTypes', this.config.dataName, function(data) {
-                    self.config.collectInfo = data[0];
-                    var $sw = $('#sw-collect');
-                    $sw.val(self.config.collectInfo.collected == 1 ? 'on' : 'off');
-                    $sw.change(function() {
-                        var $this = $(this), val = $this.val();
-                        self.config.collectInfo.collected = val == 'on' ? 1 : 0;
-                        ukApp.do('setCollect', {
-                            key: self.config.dataName,
-                            data: self.config.collectInfo
+                    $('#ln-data-input').click(function () {
+                        $(document).one("pagechange", function (e, f) {
+                            popPage.navigate("data-input", {dataName: config.dataName});
+                        });
+                        $.mobile.changePage('#app_pop_page_1', {
+                            showLoadMsg: false
                         });
                     });
-                });
+
+                    $('#ln-show-data').click(function () {
+                        appModule.navigate("data-list");
+                    });
+
+                    ukApp.get('collectTypes', {
+                        dataName: config.dataName
+                    }, function (data) {
+                        config.collectInfo = data[0];
+                        var $sw = $('#sw-collect');
+                        $sw.val(config.collectInfo.collected == 1 ? 'on' : 'off');
+                        $sw.change(function () {
+                            var $this = $(this),
+                                val = $this.val();
+                            config.collectInfo.collected = val == 'on' ? 1 : 0;
+                            ukApp.do('setCollect', {
+                                key: {
+                                    dataName: config.dataName
+                                },
+                                data: config.collectInfo
+                            });
+                        });
+                    });
 
 
-                // var ctx = document.getElementById('data-chart').getContext('2d');
+                    // var ctx = document.getElementById('data-chart').getContext('2d');
 
-                // var myChart = new Chart(ctx,{
-                //     type: 'line',
-                //     data: {
-                //         datasets: [{
-                //             label: 'First dataset',
-                //             data: [0, 20, 40, 50]
-                //         }],
-                //         labels: ['January', 'February', 'March', 'April']
-                //     },
-                //     options: {
-                //         scale: {
-                //             ticks: {
-                //                 suggestedMin: 50,
-                //                 suggestedMax: 100
-                //             }
-                //         }
-                //     }
-                // });
-            },
-            show: function (mdlEl, dataName) {
-                var el = mdlEl,
-                    fragment = new Fragment(el);
-                this.config = ukApp.cache['types'][dataName];
-                fragment.load(tpl, this.config, this.onLayoutLoaded.bind(this));
-                $(el).trigger('create');
-            }
-        };
+                    // var myChart = new Chart(ctx,{
+                    //     type: 'line',
+                    //     data: {
+                    //         datasets: [{
+                    //             label: 'First dataset',
+                    //             data: [0, 20, 40, 50]
+                    //         }],
+                    //         labels: ['January', 'February', 'March', 'April']
+                    //     },
+                    //     options: {
+                    //         scale: {
+                    //             ticks: {
+                    //                 suggestedMin: 50,
+                    //                 suggestedMax: 100
+                    //             }
+                    //         }
+                    //     }
+                    // });
+                },
+                show: function (mdlEl, dataName) {
+                    pageEl = mdlEl;
+                    var fragment = new Fragment(pageEl);
+                    config = ukApp.cache['types'][dataName];
+                    fragment.load(tpl, config, this.onLayoutLoaded.bind(this));
+                    $(pageEl).trigger('create');
+                }
+            };
 
         return dataPage;
 

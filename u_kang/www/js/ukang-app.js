@@ -28,29 +28,30 @@ define(['core/context', 'core/data-store', 'ukang-utils', 'ukang-constants', 'pr
                 },
                 /**
                  * 最后的数据
-                 *   params必须有{
-                 *      dataName: 'XXXX'      
-                 *   }
                  */
                 latestRecord: function (params, onData) {
-                    var self = this;
-                    if (!_.isObject(params) || !!!(params.dataName)) return;
-                    dataStore.get('测量数据', params, function (data) {
-                        if (data && _.isArray(data)) {
-                            if (_.isEmpty(data)) {
-                                onData({
-                                    dataName: params.dataName,
-                                    isEmpty: true
-                                });
-                            } else {
-                                var got = data[0].data,
-                                    sorted = _.sortBy(got, 'date'),
-                                    record = _.last(sorted);
-                                record.dataName = params.dataName;
-                                onData(record);
-                            }
-                        }
-                    });
+                    // var self = this;
+                    dataStore.get('测量数据', {
+                        function: 'latestData',
+                        params: params
+                    }, onData);
+                    // if (!_.isObject(params) || !!!(params.dataName)) return;
+                    // dataStore.get('测量数据', params, function (data) {
+                    //     if (data && _.isArray(data)) {
+                    //         if (_.isEmpty(data)) {
+                    //             onData({
+                    //                 dataName: params.dataName,
+                    //                 isEmpty: true
+                    //             });
+                    //         } else {
+                    //             var got = data[0].data,
+                    //                 sorted = _.sortBy(got, 'date'),
+                    //                 record = _.last(sorted);
+                    //             record.dataName = params.dataName;
+                    //             onData(record);
+                    //         }
+                    //     }
+                    // });
                 },
                 setCollect: function (params, onSuccess) {
                     var self = this;
@@ -91,8 +92,8 @@ define(['core/context', 'core/data-store', 'ukang-utils', 'ukang-constants', 'pr
                                             dataName: record.dataName,
                                             d: dt.d,
                                             t: dt.t,
-                                            value: record.value,
-                                            unit: type.unit
+                                            value: record.value1, //TODO 处理 updown 等不同格式内容
+                                            unit: type.unitDisp
                                         };
                                     }
                                     info.data['collected'].push(highlightRecord);
@@ -105,8 +106,8 @@ define(['core/context', 'core/data-store', 'ukang-utils', 'ukang-constants', 'pr
                                                 dataName: record.dataName,
                                                 d: dt.d,
                                                 t: dt.t,
-                                                value: record.value,
-                                                unit: type.unit
+                                                value: record.value1,
+                                                unit: type.unitDisp
                                             };
                                         if (type.type) highlightRecord.type = type.type;
                                         info.data['specified'] = info.data['specified'] || [];
@@ -145,21 +146,38 @@ define(['core/context', 'core/data-store', 'ukang-utils', 'ukang-constants', 'pr
                         // },
                         onCollectTypes = function (collectTypes) {
                             info.cache['collects'] = collectTypes;
-                            for (var i in ukApp.cache['types']) {
-                                self.latestRecord({
-                                    dataName: i
-                                }, onLatestRecord);
-                            }
-                            onData({
-                                hasData: info.data,
-                                rests: info.rests
+                            self.latestRecord(null, function (data) {
+                                var indexed = {};
+                                if (!_.isEmpty(data)) indexed = _.indexBy(data, 'dataName');
+                                for (var i in ukApp.cache['types']) {
+                                    var record = indexed[i];
+                                    if (_.isEmpty(record)) {
+                                        record = {
+                                            dataName: i,
+                                            isEmpty: true
+                                        }
+                                    }
+                                    onLatestRecord(record);
+                                }
+                                onData({
+                                    hasData: info.data,
+                                    rests: info.rests
+                                });
                             });
-                            
-                            // self.allTypes(null, onAllTypes);
+
                         };
                     this.collectTypes({
                         collected: 1
                     }, onCollectTypes);
+                },
+                getData: function (params, onData) {
+                    dataStore.get('测量数据', params, onData);
+                },
+                addData: function (params, onSuccess) {
+                    dataStore.set('测量数据', {}, params, onSuccess);
+                },
+                delData: function (params, onSuccess) {
+                    dataStore.set('测量数据', params, null, onSuccess);
                 }
             },
             callDataHandler = function (type, params, onData) {
@@ -172,7 +190,8 @@ define(['core/context', 'core/data-store', 'ukang-utils', 'ukang-constants', 'pr
                  * 初始化
                  */
                 initialize: function () {
-                    prepareDb.execute();
+                    if (window.app.inDevice) prepareDb.execute();
+                    else context['status'] = 'prepared';
 
                     var self = this,
                         doneTypes = function (data) {
@@ -198,16 +217,16 @@ define(['core/context', 'core/data-store', 'ukang-utils', 'ukang-constants', 'pr
                                 setTimeout(waitAppDatas, 300);
                             }
                         },
-                        onPrepared = function () {
+                        waitPrepared = function () {
                             if (context['status'] == 'prepared') {
                                 require(['app-datas'], function () {
                                     waitAppDatas();
                                 });
                             } else {
-                                setTimeout(onPrepared, 300);
+                                setTimeout(waitPrepared, 300);
                             }
                         };
-                    onPrepared();
+                    waitPrepared();
                 },
                 /**
                  * 数据是否ready
@@ -221,6 +240,9 @@ define(['core/context', 'core/data-store', 'ukang-utils', 'ukang-constants', 'pr
                 },
                 do: function () {
                     this.get.apply(this, arguments);
+                },
+                currentModule: function() {
+                    return context['current_module'];
                 }
             };
 
