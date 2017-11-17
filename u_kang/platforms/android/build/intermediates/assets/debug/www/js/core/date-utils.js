@@ -371,6 +371,32 @@ define([], function () {
                 return d2Time >= mondayTime && d2Time <= sundayTime;
             },
 
+            sameWeekDays: function (d1) {
+                var oneSecond = 1000,
+                    oneDayLong = 24 * 60 * 60 * 1000,
+                    cmp = new Date(d1.getTime());
+
+                cmp.setHours(0);
+                cmp.setMinutes(0);
+                cmp.setSeconds(0);
+
+                var cmpTime = cmp.getTime(),
+                    day = cmp.getDay(),
+                    //day = day == 0 ? 7 : day,
+                    sundayTime = day == 0 ? cmpTime : cmpTime - day * oneDayLong,
+                    d = sundayTime,
+                    days = [];
+
+                days.push(new Date(d).getDate());
+
+                for (var i = 1; i < 7; i++) {
+                    d += oneDayLong;
+                    days.push(new Date(d).getDate());                    
+                }
+
+                return days;
+            },
+
             sameYear: function (d1, d2) {
                 return d1.getFullYear() == d2.getFullYear();
             },

@@ -1,13 +1,13 @@
 /* 业务模块 */
 define([
     'health-card',          //健康数据
-    'today',                //今天
+    'health-center',        //健康中心
     'datasource',           //数据来源
     'personal-center'       //个人中心
-], function(hc, td, ds, pc) {
+], function(hcard, hcenter, ds, pc) {
     var modules = {
-        healthCard: hc,
-        today: td,
+        healthCard: hcard,
+        healthCenter: hcenter,
         datasource: ds,
         personalCenter: pc
     };

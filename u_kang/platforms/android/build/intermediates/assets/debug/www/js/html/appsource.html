@@ -1,0 +1,65 @@
+<div class="ui-grid-b uk-nav-bar">
+    <div class="ui-block-a">
+        <a id="ln-ds-main" href="#" class="uk-link-1">
+            <img src="img/carat-l-red.png">数据来源</a>
+    </div>
+    <div class="ui-block-b text-center uk-frame-title">
+        <%=name%>
+    </div>
+    <div class="ui-block-c text-right">
+        <a id="ln-add-source" href="#" class="uk-link-2">&nbsp;&nbsp;</a>
+    </div>
+
+</div>
+
+<div class="uk-module-frame">
+    <div class="sep_v_20"></div>
+    <ul data-role="listview">
+        <li data-icon="false">
+            <a href="">关闭所有类别</a>
+        </li>
+    </ul>
+    <div class="uk-source-desc-small">允许或不允许
+        <%=name%> 访问此处列出的所有健康数据类型</div>
+    <div class="sep_v_5"></div>
+    <ul data-role="listview">
+        <li>
+            <a href="#">数据</a>
+        </li>
+    </ul>
+    <div class="sep_v_20"></div>
+    <div class="uk-source-desc-small">允许
+        <%=name%> 读取数据：</div>
+    <ul data-role="listview">
+        <li data-icon="false">
+            <a href="#">步数
+                <div class="uk-right-op text-right">
+                    <select id="sw-collect" data-role="slider" data-mini="true">
+                        <option value="off"></option>
+                        <option value="on" selected></option>
+                    </select>
+                </div>
+            </a>
+        </li>
+        <li data-icon="false">
+            <a href="#">血糖
+                <div class="uk-right-op text-right">
+                    <select id="sw-collect" data-role="slider" data-mini="true">
+                        <option value="off"></option>
+                        <option value="on" selected></option>
+                    </select>
+                </div>
+            </a>
+        </li>
+        <li data-icon="false">
+            <a href="#">体重
+                <div class="uk-right-op text-right">
+                    <select id="sw-collect" data-role="slider" data-mini="true">
+                        <option value="off"></option>
+                        <option value="on" selected></option>
+                    </select>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>

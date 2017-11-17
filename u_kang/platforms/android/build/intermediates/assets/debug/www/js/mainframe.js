@@ -13,8 +13,8 @@ define(['core/context', 'core/fragment', 'modules'], function (context, Fragment
                 fragment.load(frame.tpl, frame.config);
                 // $('#app_main').height(context['app'].winHeight - context['app'].navbarHeight);
 
-                M.healthCard.setDivId('mdl_health_center');
-                M.today.setDivId('mdl_today');
+                M.healthCard.setDivId('mdl_health_card');
+                M.healthCenter.setDivId('mdl_health_center');
                 M.datasource.setDivId('mdl_datasource');
                 M.personalCenter.setDivId('mdl_personal_center')
 
@@ -24,8 +24,8 @@ define(['core/context', 'core/fragment', 'modules'], function (context, Fragment
                 $('#ln-health-card').click(function () {
                     self.loadModule(M.healthCard);
                 });
-                $('#ln-today').click(function () {
-                    self.loadModule(M.today);
+                $('#ln-health-center').click(function () {
+                    self.loadModule(M.healthCenter);
                 });
                 $('#ln-datasource').click(function () {
                     self.loadModule(M.datasource);

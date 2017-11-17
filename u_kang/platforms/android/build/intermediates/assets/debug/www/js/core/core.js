@@ -1,4 +1,4 @@
-define(['core/context'], function(context) {
+define(['core/context', 'core/date-utils'], function(context, dateUtils) {
     'use strict';
 
     var winWidth, winHeight;
@@ -64,7 +64,7 @@ define(['core/context'], function(context) {
                 if (clz == 'Number' || clz=='String'){
                     v = '' + v;
                     var nodeName = el.nodeName;
-                    if (nodeName == 'INPUT' || nodeName == 'SELECT') {
+                    if (nodeName == 'INPUT' || nodeName == 'TEXTAREA' || nodeName == 'SELECT') {
                         $(el).val(v);
                     } else
                     if (nodeName == 'DIV' || nodeName == 'SPAN') {
@@ -83,7 +83,7 @@ define(['core/context'], function(context) {
                     if (nName == 'DIV' || nName == 'SPAN') {
                         v[d_id] = $this.html();
                     } else
-                    if (nName == 'INPUT' || nName == 'SELECT') {
+                    if (nName == 'INPUT' || nName == 'TEXTAREA' || nName == 'SELECT') {
                         v[d_id] = $this.val();
                     }
                 }
@@ -106,7 +106,8 @@ define(['core/context'], function(context) {
     var module = {
         __extends: __extends,
         __define: __define,
-        DomUtil: DomUtil
+        DomUtil: DomUtil,
+        DateUtils: dateUtils
     };
 
     return module;

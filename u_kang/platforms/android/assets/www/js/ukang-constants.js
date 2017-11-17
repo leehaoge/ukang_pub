@@ -20,6 +20,7 @@ define([], function () {
         "TB_收藏": 'my_collection',
         "TB_测量数据": 'data_samples',
         "TB_系统配置": 'sys_settings',
+        "TB_APP用户": 'app_user',
         //----------------------
 
 

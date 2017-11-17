@@ -786,7 +786,7 @@ div.ui-controlgroup-label {
 -----------------------------------------------------------------------------------------------------------*/
 .ui-btn,
 label.ui-btn {
-	font-weight: bold;
+	/* font-weight: bold; */
 	border-width: 1px;
 	border-style: solid;
 }
@@ -978,7 +978,7 @@ html .ui-bar-a a,
 html .ui-body-a a,
 html body .ui-group-theme-a a {
 	color: #3388cc /*{a-link-color}*/;
-	font-weight: bold;
+	/* font-weight: bold; */
 }
 .ui-page-theme-a a:visited,
 html .ui-bar-a a:visited,
@@ -1509,9 +1509,10 @@ div.ui-mobile-viewport {
 }
 /* Buttons and icons */
 .ui-btn {
-	font-size: 16px;
+	font-size: 15px;
 	margin: .5em 0;
-	padding: .7em 1em;
+	/* padding: .7em 1em; */
+	padding: .5em 1em;
 	display: block;
 	position: relative;
 	text-align: center;

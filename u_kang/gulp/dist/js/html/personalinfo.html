@@ -1,0 +1,57 @@
+<div class="ui-grid-a uk-nav-bar">
+    <div class="ui-block-a">
+        <a id="ln-pi-cancel" href="#" class="uk-link-1"><img src="img/carat-l-red.png">取消</a>
+    </div>
+    <div class="ui-block-b text-right">
+        <a id="ln-pi-save" href="#" class="uk-link-1">保存</a>
+    </div>
+</div>
+
+<div class="uk-module-frame" id="person-info-pane">
+    <div class="sep_v_20"></div>
+    <div>
+        <div class="portrait float-left"></div>
+        <div class="uk-input-pane-2">
+            <input type="text" data-role="none" data-id="name" class="uk-trail-input" value="<%=name%>">
+        </div>
+    </div>
+    <div>
+        <div class="info-label-pane">出生日期</div>
+        <div class="info-unit-pane"></div>
+        <div class="info-input-pane-withunit">
+            <input type="date" id="di-sample-date" data-id="birthday" class="uk-flat-input uk-trail-input" data-role="none" value="<%=birthday%>">
+        </div>
+    </div>
+    <div class="uk-person-info-panel">
+        <label for="medical-memo">医疗状况</label>
+        <textarea name="medical-memo" id="medical-memo" data-id="medicalMemo" data-role="none" class="uk-trail-input" ><%=medicalMemo%></textarea>
+        <label for="allergies">过敏反应</label>
+        <textarea name="allergies" id="allergies" data-id="allergies" data-role="none" class="uk-trail-input" ><%allergies%></textarea>
+        <label for="medicines">药物使用</label>
+        <textarea name="medicines" id="medicines" data-id="medicines" data-role="none" class="uk-trail-input" ><%=medicines%></textarea>
+
+    </div>
+
+    <div class="sep_v_10"></div>
+    <div>
+        <div class="info-label-pane">血型</div>
+        <div class="info-unit-pane">型</div>
+        <div class="info-input-pane-withunit">
+            <input type="text" data-role="none" data-id="bloodType" class="uk-trail-input" value="<%=bloodType%>">
+        </div>
+    </div>
+    <div>
+        <div class="info-label-pane">身高</div>
+        <div class="info-unit-pane">厘米</div>
+        <div class="info-input-pane-withunit">
+            <input type="number" data-role="none" data-id="height" class="uk-trail-input" value="<%=height%>">
+        </div>
+    </div>
+    <div>
+        <div class="info-label-pane">体重</div>
+        <div class="info-unit-pane">千克</div>
+        <div class="info-input-pane-withunit">
+            <input type="number" data-role="none" data-id="weight" class="uk-trail-input" value="<%=weight%>">
+        </div>
+    </div>
+</div>

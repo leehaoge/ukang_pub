@@ -11,7 +11,7 @@ define(['core/context', 'core/data-store', 'core/mock-data', 'ukang-constants', 
         }
 
 
-        var initCount = 5;
+        var initCount = 6;
 
         function stepInit() {
             initCount--;
@@ -109,6 +109,146 @@ define(['core/context', 'core/data-store', 'core/mock-data', 'ukang-constants', 
                         });
                     }
                     dataStore.registerItem('健康数据类型', new MockData(healthDataTypes));
+                    stepInit();
+                });
+
+
+                db.executeSql("SELECT * FROM " + CONSTS['TB_APP用户'], [], function(rs) {
+                    var allData = [],
+                    dataLen = rs.rows.length;
+                    for (var i = 0; i < dataLen; i++) {
+                        var record = rs.rows.item(i);
+                        allData.push({
+                            id: record['user_id'],
+                            name: record['u_name'],
+                            phone: record['phone'],
+                            birthday: record['birthday'],
+                            age: record['age'],
+                            weight: record['weight'],
+                            height: record['height'],
+                            bloodType: record['blood_type'],
+                            medicalMemo: record['medical_memo'], //医疗状况
+                            allergies: record['allergies'],      //过敏反应
+                            medicines: record['medicines'],      //药物使用
+                            lastUpdate: record['last_update'],
+                            //------
+                            reserved: record['reserved']
+                        });
+                    }
+                    dataStore.registerItem('APP用户', {
+                        data: allData,
+                        get: function(param) {
+                            var filter = param.filter,
+                                onData = param.onData;
+                            if ($.isFunction(onData)) {
+                                if (filter == null || filter == undefined) {
+                                    onData(this.data);
+                                } else {
+                                    if (_.isString(filter)) {
+                                        filter = {id: filter}
+                                    }
+                                    if (_.isObject(filter)) {
+                                        var filtered = _.where(this.data, filter);
+                                        onData(filtered);
+                                        return;
+                                    }
+                                }
+                            }
+
+                        },
+                        set: function(param) {
+                            var self = this,
+                                key = param.key,
+                                data = param.data,
+                                onSuccess = param.onSuccess,
+                                onFailure = param.onFailure,
+                                tbName = CONSTS['TB_APP用户'];
+
+                            function add() {
+                                var dt = utils.dbDatetime(new Date()),
+                                    sql = "INSERT INTO " + tbName + " (\
+                                    user_id, u_name, phone, birthday, age, weight, height, blood_type, medical_memo, allergies, \
+                                    medicines, last_update) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+                                db.executeSql(sql, [data['id'], data['name'], data['phone'], data['birthdaty'], data['age'],
+                                    data['weight'], data['height'], data['bloodType'], data['medical_memo'], 
+                                    data['allergies'], data['medicines'], dt], function() {
+                                        data['lastUpdate'] = dt;
+                                        self.data.push(data);
+                                        executeCallback(onSuccess);
+                                }, function (error) {
+                                    executeCallback(onFailure);
+                                })                                
+                            }
+
+                            //只支持使用id和name进行更新
+                            function update() {
+                                sqlite.getDB(function (onUpdated) {
+
+                                    var params = [], dt = utils.dbDatetime(new Date()),
+                                    sql = "UPDATE " + tbName + " SET \
+                                    user_id = ?,\
+                                    phone = ?,\
+                                    u_name = ?,\
+                                    birthday = ?,\
+                                    age = ?,\
+                                    weight = ?,\
+                                    height = ?,\
+                                    blood_type = ?,\
+                                    allergies = ?,\
+                                    medicines = ?,\
+                                    last_update = ?\
+                                    WHERE ";
+
+                                    params.push(data['id']);
+                                    params.push(data['name']);
+                                    params.push(data['phone'] || '');
+                                    params.push(data['birthday' || '']);
+                                    params.push(data['age']);
+                                    params.push(data['weight']);
+                                    params.push(data['height']);
+                                    params.push(data['blood_type']);
+                                    params.push(data['allergies']);
+                                    params.push(data['medicines']);
+                                    params.push(dt);
+                                    
+                                    if (key['id']) {
+                                        sql += "user_id = ?";
+                                        params.push(key['id']);
+                                    } else 
+                                    if (key['name']) {
+                                        sql += "u_name = ?";
+                                        params.push(key['name']);
+                                    } else {
+                                        executeCallback(onFailure);
+                                    }
+                                    db.executeSql(sql, params, function () {
+                                        data['lastUpdate'] = dt;
+                                        executeCallback(onUpdated);
+                                        executeCallback(onSuccess);
+                                    }, function (error) {
+                                        executeCallback(onFailure);
+                                    });
+                                });
+                            }
+
+                            if (key == null || _.isEmpty(key)) {
+                                //This is add
+                                add();
+                            } else {
+                                if (_.isString(key)) key = {id: key};
+                                if (_.isObject(key)) {
+                                    var filtered = _.where(self.data, key);
+                                    if (_.isEmpty(filtered)) add();
+                                    else
+                                        update(function() {
+                                            var others = _.without(self.data, filtered);
+                                            others.push(data);
+                                        });
+                                }
+                            }
+
+                        }
+                    });
                     stepInit();
                 });
 
@@ -218,6 +358,12 @@ define(['core/context', 'core/data-store', 'core/mock-data', 'ukang-constants', 
                         data.push(this.transform(rs.rows.item(i)));
                     }
                     return data;
+                },
+                dataOfDate: function(params, onData) {
+                    this.get({
+                        filter: {date: params.date},
+                        onData: onData
+                    });
                 },
                 latestData: function (params, onData) {
                     var self = this;
@@ -379,8 +525,26 @@ define(['core/context', 'core/data-store', 'core/mock-data', 'ukang-constants', 
             stepInit();
 
         } else {
-
+            
             //纯浏览器，假数据！
+
+            //APP用户:
+            var appUsers = [
+                {
+                    id: 'default', name: '浩哥', phone: '13500000217', birthday: '1973-02-27', age: 44, weight: 80, height: 173, bloodType: 'O',
+                    medicalMemo: '', //医疗状况
+                    allergies: '',   //过敏反应
+                    medicines: '',   //药物使用
+                    lastUpdate: utils.dbDatetime(new Date()),  //
+
+                    //--------------------
+                    reserved: ''     //保留
+                }
+            ];
+
+            dataStore.registerItem('APP用户', new MockData(appUsers));
+            stepInit();
+
 
             //基本数据类型:
             var basicTypes = [
@@ -444,6 +608,12 @@ define(['core/context', 'core/data-store', 'core/mock-data', 'ukang-constants', 
                     ret.push(record);
                 }
                 executeCallback(onData, ret);
+            }.bind(hdHandler);
+
+            hdHandler['dataOfDate'] = function(params, onData) {
+                executeCallback(onData, _.filter(this.data, function(item) {
+                    return ('' + item.date).substr(0, 10) == utils.dbDate(params.date);
+                }));
             }.bind(hdHandler);
 
             dataStore.registerItem('测量数据', hdHandler);

@@ -1,16 +1,19 @@
-<div class="uk-module-frame">
-    <div class="ui-grid-b">
-        <div class="ui-block-a">
-            <a id="ln-hc-main" href="#" class="uk-link-1">&lt;返回</a>
-        </div>
-        <div class="ui-block-b text-center uk-frame-title">
-            <%=dataName%>
-        </div>
-        <div class="ui-block-c text-right">
-            <a id="ln-data-input" href="#" class="uk-link-1">＋</a>
-        </div>
-
+<div class="ui-grid-b uk-nav-bar">
+    <div class="ui-block-a">
+        <a id="ln-hc-main" href="#" class="uk-link-1">
+            <img src="img/carat-l-red.png">返回</a>
     </div>
+    <div class="ui-block-b text-center uk-frame-title">
+        <%=dataName%>
+    </div>
+    <div class="ui-block-c text-right">
+        <a id="ln-data-input" href="#" class="uk-link-1">&nbsp;
+            <img src="img/plus-red.png">&nbsp;</a>
+    </div>
+
+</div>
+<div class="uk-module-frame">
+
     <div class="sep_v_5"></div>
     <div class="ui-grid-c ui-corner-all uk-thin-border-red uk-data-period">
         <div class="ui-block-a text-center uk-period-block uk-data-period-selected">日
@@ -48,7 +51,9 @@
             </li>
             <li>
                 <a href="#">单位
-                    <p class="ui-li-aside"><%=unitDisp%></p>
+                    <p class="ui-li-aside">
+                        <%=unitDisp%>
+                    </p>
                 </a>
             </li>
         </ul>

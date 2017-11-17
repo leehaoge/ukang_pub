@@ -19,8 +19,8 @@
 require.config({
     baseUrl: "js",
     paths: {
-        'text': '../libs/text',
-        'chart': '../libs/Chart'
+        'text': 'libs/text',
+        'chart': 'libs/Chart'
     },
     shim: {
     }

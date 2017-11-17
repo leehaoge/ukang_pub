@@ -155,6 +155,35 @@ define(['ukang-sqlite', 'core/sqlite-utils', 'ukang-constants', 'core/context'],
                     console.log('“测量数据”表[' + tbName + ']创建失败！message: ' + error.message);
                 });
             },
+            '建表_APP用户': function (db, onSuccess) {
+                /**
+                 * 测量数据表
+                 */
+                var tbName = CONSTS['TB_APP用户'];
+                db.sqlBatch([
+                    "CREATE TABLE " + tbName + " (\
+                        user_id TEXT PRIMARY KEY,\
+                        u_name TEXT NOT NULL,\
+                        phone TEXT NOT NULL,\
+                        birthday TEXT,\
+                        age INTEGER,\
+                        weight REAL,\
+                        height READ,\
+                        blood_type TEXT,\
+                        medical_memo TEXT,\
+                        allergies TEXT,\
+                        medicines TEXT,\
+                        last_update TEXT\
+                    )",
+                    ["INSERT INTO " + tbName + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", [
+                        'default','默认用户','','1990-01-01',(new Date().getFullYear() - 1990),0,0,'','','','',new Date()]]
+                ], function () {
+                    console.log('“APP用户”表[' + tbName + ']创建成功！');
+                    executeCallback(onSuccess);
+                }, function (error) {
+                    console.log('“APP用户”表[' + tbName + ']创建失败！message: ' + error.message);
+                });
+            },
             '清除所有表': function (db) {
                 var dropSQL = function (tableName) {
                         return "DROP TABLE IF EXISTS " + tableName;
@@ -230,7 +259,8 @@ define(['ukang-sqlite', 'core/sqlite-utils', 'ukang-constants', 'core/context'],
             createTableIfNotExists('数据单位');
             createTableIfNotExists('收藏', prepareCollects);
             createTableIfNotExists('测量数据');
-
+            createTableIfNotExists('APP用户');
+            
             checkPrepared();
         }
 
