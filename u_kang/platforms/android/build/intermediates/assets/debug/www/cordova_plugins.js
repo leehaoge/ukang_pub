@@ -7,13 +7,22 @@ module.exports = [
     "clobbers": [
       "SQLitePlugin"
     ]
+  },
+  {
+    "id": "ukang-plugin-sleepace.sleepacePillow",
+    "file": "plugins/ukang-plugin-sleepace/www/sleepace-pillow.js",
+    "pluginId": "ukang-plugin-sleepace",
+    "clobbers": [
+      "SleepacePillow"
+    ]
   }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
   "cordova-plugin-whitelist": "1.3.2",
-  "cordova-sqlite-storage": "2.1.0"
+  "cordova-sqlite-storage": "2.1.0",
+  "ukang-plugin-sleepace": "0.3.0"
 };
 // BOTTOM OF METADATA
 });

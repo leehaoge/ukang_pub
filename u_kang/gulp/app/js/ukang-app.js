@@ -1,8 +1,8 @@
 /***
  * APP数据逻辑处理 
  **/
-define(['core/core', 'core/context', 'core/data-store', 'ukang-utils', 'ukang-constants', 'prepare-db'],
-    function (CORE, context, dataStore, UTILS, CONSTS, prepareDb) {
+define(['core/core', 'core/context', 'core/data-store', 'ukang-utils', 'ukang-constants', 'type-data', 'prepare-db'],
+    function (CORE, context, dataStore, UTILS, CONSTS, typeData, prepareDb) {
         'use strict';
 
         var appDataReady = false,
@@ -206,6 +206,7 @@ define(['core/core', 'core/context', 'core/data-store', 'ukang-utils', 'ukang-co
             },
             ukApp = {
                 cache: {},
+                typeData: typeData,
                 /**
                  * 初始化
                  */

@@ -1,5 +1,9 @@
-define(['text!html/healthcard.html', 'ukang-app', 'core/core', 'core/fragment', 'core/base-module', 'data-page', 'data-list', 'calendar'],
-    function (tpl, ukApp, CORE, Fragment, BaseModule, dataPage, dataList, calendar) {
+define(['text!html/healthcard.html', 'ukang-app', 'core/core', 'core/fragment', 'core/base-module', 'data-page', 'data-list', 
+    'calendar', 'gym-record', 'think-trainning', 'nutritions', 'sleeping-info', 'health-record', 'body-measurement', 'reproductive',
+    'data-result', 'heart-info', 'body-charactor', 'data-page1', 'bluetooth-scan', 'sleepace-pillow'],
+    function (tpl, ukApp, CORE, Fragment, BaseModule, dataPage, dataList, calendar, gymRecord, thinkTrainning, nutritions, 
+        sleepingInfo, healthRecord, bodyMeasurement, reproductive, dataResult, heartInfo, bodyCharactor, dataPage1, bluetoothScan,
+        sleepacePillow) {
         'use strict';
 
         const tplGroup = '\
@@ -60,7 +64,11 @@ define(['text!html/healthcard.html', 'ukang-app', 'core/core', 'core/fragment', 
                     dataName = $this.attr('data-id');
                 if (dataName && module.el) {
                     module.config.dataName = dataName;
-                    module.navigate("data-page");
+                    module.config.pageFrom = {
+                        id: "",
+                        display: "健康数据"
+                    };
+                        module.navigate("data-page");
                 }
             };
             $('.uk-data-link').click(intoDataView);
@@ -70,6 +78,10 @@ define(['text!html/healthcard.html', 'ukang-app', 'core/core', 'core/fragment', 
             $('#lh-pc-main').click(function() {
                 $('#ln-personal-center').trigger('click');
                 // ukApp.navigate('personalCenter', "");
+            });
+            $('#hc-main-type-list a').click(function () {
+                var $this = $(this), pageId = $this.attr('data-id');
+                module.navigate('type-' + pageId);
             });
 
             var theDate = module.config.date || new Date();
@@ -130,36 +142,83 @@ define(['text!html/healthcard.html', 'ukang-app', 'core/core', 'core/fragment', 
                         // infoContent += getGroupContent('今年', 'thisyear', data);
                         // infoContent += getGroupContent('更早', 'specified', data);
                     }
-                    if (data.rests && _.isArray(data.rests) && !_.isEmpty(data.rests)) {
-                        if (infoContent.length > 0) infoContent += '\
-                            <div class="sep_v_10"></div>\
-                    ';
-                        var restList = '';
-                        for (var i in data.rests) {
-                            restList += funcRestItem(data.rests[i]);
-                        }
-                        infoContent += funcRests({
-                            list: restList
-                        });
-                    }
+                    // if (data.rests && _.isArray(data.rests) && !_.isEmpty(data.rests)) {
+                    //     if (infoContent.length > 0) infoContent += '\
+                    //         <div class="sep_v_10"></div>\
+                    // ';
+                    //     var restList = '';
+                    //     for (var i in data.rests) {
+                    //         restList += funcRestItem(data.rests[i]);
+                    //     }
+                    //     infoContent += funcRests({
+                    //         list: restList
+                    //     });
+                    // }
                 }
                 hcFragment.load(infoContent, {}, setDataLinks);
                 $(hcEl).trigger('create');
             },
             loaded = function () {
+                $('.uk-hc-img-li').click(function() {
+                    var $this = $(this), pageId = $this.attr('data-id');
+                    module.navigate(pageId);
+                });
+                $('#hc-main-type-list a').click(function() {
+
+                });
+
                 ukApp.get('highlights', {
                     date: module.config.date || new Date()
                 }, onHighlightData);
             },
             pages = {
                 "data-page": function () {
-                    dataPage.show(module.el, module.config.dataName);
+                    dataPage1.show(module.el, module.config.dataName);
                 },
                 "data-list": function () {
                     dataList.show(module.el, module.config.dataName);
                 },
                 "calendar": function () {
                     calendar.show(module.el);
+                },
+                "gym": function() {
+                    gymRecord.show(module.el);
+                },
+                "think": function() {
+                    thinkTrainning.show(module.el);
+                },
+                "nutritions": function() {
+                    nutritions.show(module.el);
+                },
+                "sleeping": function() {
+                    sleepingInfo.show(module.el);
+                },
+                "health-record": function() {
+                    healthRecord.show(module.el);
+                },
+                "type-hr": function() {
+                    healthRecord.show(module.el);
+                },
+                "type-bm": function() {
+                    bodyMeasurement.show(module.el);
+                },
+                "type-re": function() {
+                    reproductive.show(module.el);
+                },
+                "type-dr": function() {
+                    dataResult.show(module.el);
+                },
+                "type-ht": function() {
+                    heartInfo.show(module.el);
+                },
+                "type-bc": function() {
+                    bodyCharactor.show(module.el);
+                },
+                "bt-scan": function() {
+                    bluetoothScan.show(module.el);
+                },
+                "sleepace-pillow": function() {
+                    sleepacePillow.show(module.el);
                 }
             };
 

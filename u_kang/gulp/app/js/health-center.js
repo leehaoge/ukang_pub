@@ -1,5 +1,6 @@
-define(['text!html/healthcenter.html', 'core/base-module', 'health-notice', 'solutions', 'articles', 'health-hints', 'ukang-mall'],
-    function (tpl, BaseModule, healthNotice, solutions, articles, healthHints, ukangMall) {
+define(['text!html/healthcenter.html', 'core/base-module', 'health-notice', 'solutions', 'articles', 'health-hints', 
+    'ukang-mall', 'solution-article'],
+    function (tpl, BaseModule, healthNotice, solutions, articles, healthHints, ukangMall, solutionArticle) {
         'use strict';
 
         var module = new BaseModule();
@@ -36,6 +37,9 @@ define(['text!html/healthcenter.html', 'core/base-module', 'health-notice', 'sol
             },
             'mall': function() {
                 ukangMall.show(module.el);
+            },
+            'solution-article': function() {
+                solutionArticle.show(module.el);
             }
         };
 

@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:2:1-14:12
+ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:2:1-17:12
 	package
 		ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:2:100-124
 		INJECTED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml
@@ -78,3 +78,15 @@ MERGED from [org.apache.cordova:CordovaLib:6.3.0:debug] E:\ukang\dev\u_kang\plat
 		ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:13:42-71
 	android:minSdkVersion
 		ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:13:15-41
+uses-permission#android.permission.BLUETOOTH
+ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:14:5-68
+	android:name
+		ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:14:22-65
+uses-permission#android.permission.BLUETOOTH_ADMIN
+ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:15:5-74
+	android:name
+		ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:15:22-71
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:16:5-81
+	android:name
+		ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:16:22-78

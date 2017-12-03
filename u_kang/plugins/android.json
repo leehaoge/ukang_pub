@@ -12,6 +12,9 @@
     },
     "cordova-sqlite-storage": {
       "PACKAGE_NAME": "com.lec.u_kang"
+    },
+    "ukang-plugin-sleepace": {
+      "PACKAGE_NAME": "com.lec.u_kang"
     }
   },
   "dependent_plugins": {}

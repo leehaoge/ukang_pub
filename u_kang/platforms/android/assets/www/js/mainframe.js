@@ -11,7 +11,7 @@ define(['core/context', 'core/fragment', 'modules'], function (context, Fragment
             loadFrame: function (frame) {
                 var self = this;
                 fragment.load(frame.tpl, frame.config);
-                // $('#app_main').height(context['app'].winHeight - context['app'].navbarHeight);
+                $('#app_main').height(context['app'].winHeight - context['app'].navbarHeight);
 
                 M.healthCard.setDivId('mdl_health_card');
                 M.healthCenter.setDivId('mdl_health_center');

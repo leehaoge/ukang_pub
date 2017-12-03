@@ -3719,9 +3719,9 @@ fieldset.ui-controlgroup {
 .ui-listview > .ui-li-has-icon > .ui-btn > img:first-child {
 	position: absolute;
 	left: .625em;
-	top: .9em;
-	max-height: 1em;
-	max-width: 1em;
+	top: .3em;
+	max-height: 1.5em;
+	max-width: 1.5em;
 }
 .ui-listview > li h1,
 .ui-listview > li h2,

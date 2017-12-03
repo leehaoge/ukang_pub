@@ -1,5 +1,5 @@
-define(['core/context', 'core/data-store', 'core/mock-data', 'ukang-constants', 'ukang-sqlite', 'ukang-utils'],
-    function (context, dataStore, MockData, CONSTS, sqlite, utils) {
+define(['core/context', 'core/data-store', 'core/mock-data', 'ukang-constants', 'ukang-sqlite', 'ukang-utils', 'type-data'],
+    function (context, dataStore, MockData, CONSTS, sqlite, utils, typeData) {
         'use strict';
 
         function executeCallback(cb) {
@@ -262,6 +262,15 @@ define(['core/context', 'core/data-store', 'core/mock-data', 'ukang-constants', 
                             collected: record['collected']
                         });
                     }
+                    var cIndexed = _.indexBy(collects, 'dataName');
+                    for (var i in typeData.data) {
+                        var ht = typeData.data[i];
+                        if (!cIndexed[ht.dataName])
+                            allData.push({
+                                dataName: ht.dataName,
+                                collected: 0
+                            });
+                    }
                     dataStore.registerItem('收藏', {
                         data: allData,
                         // transform: function(record) {
@@ -321,7 +330,8 @@ define(['core/context', 'core/data-store', 'core/mock-data', 'ukang-constants', 
                                     db.executeSql(sql, [record['collected'] || 0, dataName], function () {
                                         executeCallback(onSuccess);
                                     }, function (error) {
-                                        executeCallback(onFailure);
+                                        executeCallback(onSuccess);
+                                        // executeCallback(onFailure);
                                     });
                                 });
                             }
@@ -629,6 +639,17 @@ define(['core/context', 'core/data-store', 'core/mock-data', 'ukang-constants', 
                 });
             }
 
+            var cIndexed = _.indexBy(collects, 'dataName');
+
+            for (var i in typeData.data) {
+                var ht = typeData.data[i];
+                if (!cIndexed[ht.dataName])
+                    collects.push({
+                        dataName: ht.dataName,
+                        collected: 0
+                    });
+            }
+            
             dataStore.registerItem('收藏', new MockData(collects));
             stepInit();
         }

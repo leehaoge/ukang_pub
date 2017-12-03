@@ -6,6 +6,9 @@ define(['text!html/solutions.html', 'core/fragment', 'ukang-app'], function(tpl,
             $('#ln-health-center').click(function() {
                 aModule.navigate("");
             });
+            $('.uk-art-link').click(function() {
+                aModule.navigate('solution-article');
+            });            
             $(aModule.el).trigger('create');
         },
         module = {
