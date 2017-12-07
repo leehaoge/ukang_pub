@@ -371,7 +371,7 @@ define(['core/context', 'core/data-store', 'core/mock-data', 'ukang-constants', 
                 },
                 dataOfDate: function(params, onData) {
                     this.get({
-                        filter: {date: params.date},
+                        filter: params,
                         onData: onData
                     });
                 },
@@ -438,16 +438,31 @@ define(['core/context', 'core/data-store', 'core/mock-data', 'ukang-constants', 
                             pushOption("strftime('%Y-%m-%d'," + fieldName + ')', formated, op);
                         }
 
+                        function pushFormatedDateOption(fieldName, value, filterFormat, fieldFormat) {
+                            var d = utils.DateUtils.parse(value),
+                            formated = utils.DateUtils.format(d, filterFormat);
+                            pushOption("strftime('" + fieldFormat + "'," + fieldName + ')', formated);
+                        }
+
+
                         if (filter['id']) {
                             pushOption('data_id', filter['id']);
                         } else {
                             if (filter['dataName']) pushOption('data_name', filter['dataName']);
+                            if (filter['month']) {
+                                //filter['month'] must by yyyy-MM
+                                pushFormatedDateOption('s_date', filter['month'] + '-01', 'yyyy-MM', '%Y-%m')
+                            } else 
+                            if (filter['year']) {
+                                //filter['year'] must by yyyy
+                                pushFormatedDateOption('s_date', filter['year'] + '-01-01', 'yyyy', '%Y')
+                            } else 
                             if (filter['date']) {
                                 pushDateOption('s_date', filter['date']);
                             } else {
                                 if (filter['startDate']) pushDateOption('s_date', filter['startDate'], ">=");
                                 if (filter['endDate']) pushDateOption('s_date', filter['endDate'], "<=");
-                            }
+                            } 
                         }
 
                         if (wheres.length > 0) {
@@ -609,22 +624,78 @@ define(['core/context', 'core/data-store', 'core/mock-data', 'ukang-constants', 
 
             var hdHandler = new MockData([], 'data_id');
 
-            hdHandler['latestData'] = function(params, onData) {
-                var ret = [], grouped = _.groupBy(this.data, 'dataName');
-                for (var dName in grouped) {
-                    var group = grouped[dName], 
-                        sorted = _.sortBy(group, 'date'),
-                        record = _.last(sorted);
-                    ret.push(record);
+            hdHandler = $.extend(hdHandler, {
+                latestData: function(params, onData) {
+                    var ret = [], grouped = _.groupBy(this.data, 'dataName');
+                    for (var dName in grouped) {
+                        var group = grouped[dName], 
+                            sorted = _.sortBy(group, 'date'),
+                            record = _.last(sorted);
+                        ret.push(record);
+                    }
+                    executeCallback(onData, ret);
+                },
+                dataOfDate: function(params, onData) {
+                    executeCallback(onData, _.filter(this.data, function(item) {
+                        if (params['dataName']) {
+                            if (item.dataName != params['dataName']) return false;
+                        }
+                        return ('' + item.date).substr(0, 10) == utils.dbDate(params.date);
+                    }));
+                },
+                isEx: function(filter) {
+                    return (filter['year'] != undefined) || 
+                           (filter['month'] != undefined) ||
+                           (filter['startDate'] != undefined) ||
+                           (filter['endDate'] != undefined);
+                },
+                getEx: function(filter) {
+                    var byYear = false, byMonth = false, byStartEndDate = false;
+                    if (filter['year']) {
+                        byYear = true;
+                    } else
+                    if (filter['month']) {
+                        byMonth = true;
+                    } else {
+                        byStartEndDate = true;
+                    }
+                    return _.filter(this.data, function(itm) {
+                        if (filter['dataName']) {
+                            if (itm.dataName != filter['dataName']) return false;
+                        }
+                        if (byYear) {
+                            return itm.date.substr(0, 4) == filter['year'];
+                        }
+                        if (byMonth) {
+                            return itm.date.substr(0, 7) == filter['month'];
+                        } 
+                        if (byStartEndDate) {
+                            var pass = false;
+                            if (filter['startDate']) pass = itm.date.substr(0, 10) >= filter['startDate'];
+                            if (pass && filter['endDate']) pass =  itm.date.substr(0, 10) <= filter['endDate'];
+                            return pass;
+                        }
+                    });
                 }
-                executeCallback(onData, ret);
-            }.bind(hdHandler);
+            });
 
-            hdHandler['dataOfDate'] = function(params, onData) {
-                executeCallback(onData, _.filter(this.data, function(item) {
-                    return ('' + item.date).substr(0, 10) == utils.dbDate(params.date);
-                }));
-            }.bind(hdHandler);
+            // hdHandler['latestData'] = function(params, onData) {
+            //     var ret = [], grouped = _.groupBy(this.data, 'dataName');
+            //     for (var dName in grouped) {
+            //         var group = grouped[dName], 
+            //             sorted = _.sortBy(group, 'date'),
+            //             record = _.last(sorted);
+            //         ret.push(record);
+            //     }
+            //     executeCallback(onData, ret);
+            // }.bind(hdHandler);
+
+            // hdHandler['dataOfDate'] = function(params, onData) {
+            //     executeCallback(onData, _.filter(this.data, function(item) {
+            //         return ('' + item.date).substr(0, 10) == utils.dbDate(params.date);
+            //     }));
+            // }.bind(hdHandler);
+
 
             dataStore.registerItem('测量数据', hdHandler);
             stepInit();

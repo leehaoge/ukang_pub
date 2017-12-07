@@ -25,6 +25,9 @@ define(['text!html/datainput.html', 'core/fragment', 'core/core', 'ukang-utils',
                                     value2: null
                                 };
                                 ukApp.do('addData', data, function() {
+                                    $(document).one('pagechange', function() {
+                                        ukApp.currentModule().navigate('refresh-view');
+                                    });
                                     $.mobile.changePage('#app_main_page', {
                                         showLoadMsg: false
                                     });

@@ -1,5 +1,5 @@
-define(['text!html/datapage.1.html', 'core/fragment', 'ukang-app', 'pop-page', 'ukang-chart'],
-    function (tpl, Fragment, ukApp, popPage, UKangChart) {
+define(['text!html/datapage.1.html', 'core/fragment', 'ukang-utils', 'ukang-app', 'pop-page', 'ukang-chart'],
+    function (tpl, Fragment, UTILS, ukApp, popPage, UKangChart) {
         'use strict';
 
         var charFeatures = {
@@ -187,7 +187,7 @@ define(['text!html/datapage.1.html', 'core/fragment', 'ukang-app', 'pop-page', '
                 }
             };
 
-        function getChartData(chartId) {
+        function getChartData_fake(chartId) {
             if (fakeData[chartId]) {
                 var ret = fakeData[chartId];
                 if (ret['data'] && !_.isEmpty(ret['data'])) {
@@ -207,6 +207,45 @@ define(['text!html/datapage.1.html', 'core/fragment', 'ukang-app', 'pop-page', '
             }
         }
 
+        function getChartData(chartId, onData, refDate) {
+            var filter = {
+                    dataName: config.dataName
+                }, cDate = refDate || new Date(),
+                gotData = function(data) {
+                    var ret = {data: data};
+                    if (ret['data'] && !_.isEmpty(ret['data'])) {
+                        var dMin = _.min(ret.data, function (itm) {
+                                return itm.value1;
+                            }),
+                            dMax = _.max(ret.data, function (itm) {
+                                return itm.value1;
+                            });
+                        ret.min = dMin.value1;
+                        ret.max = dMax.value1;
+                    }
+                    onData(ret);
+                };
+            if ('d' == chartId) {
+                filter.date = UTILS.DateUtils.format(cDate, 'yyyy-MM-dd');
+                ukApp.get('dataOfDate', filter, gotData);
+            } else
+            if ('w' == chartId) {
+                var day = cDate.getDay();
+                cDate.setDate(cDate.getDate() - day);
+                filter.startDate = UTILS.DateUtils.format(cDate, 'yyyy-MM-dd');
+                cDate.setDate(cDate.getDate() + 6);
+                filter.endDate = UTILS.DateUtils.format(cDate, 'yyyy-MM-dd');
+                ukApp.get('getData', filter, gotData);
+            } else
+            if ('m' == chartId) {
+                filter.month = UTILS.DateUtils.format(cDate, 'yyyy-MM');
+                ukApp.get('getData', filter, gotData);
+            } else
+            if ('y' == chartId) {
+                filter.year = UTILS.DateUtils.format(cDate, 'yyyy');
+                ukApp.get('getData', filter, gotData);
+            } 
+        }
 
         var pageEl,
             config = {
@@ -214,11 +253,12 @@ define(['text!html/datapage.1.html', 'core/fragment', 'ukang-app', 'pop-page', '
             },
             dataPage = {
                 showChart: function (chartId) {
-                    var chartData = getChartData(chartId);
-                    var chart = new UKangChart();
-                    chart.initialize(document.getElementById('ukang-chart-pane'),
-                        chartId, charFeatures);
-                    chart.drawChart(chartData);
+                    getChartData(chartId, function(chartData) {
+                        var chart = new UKangChart();
+                        chart.initialize(document.getElementById('ukang-chart-pane'),
+                            chartId, charFeatures);
+                        chart.drawChart(chartData);
+                    });
                 },
                 onLayoutLoaded: function () {
                     var self = this,
@@ -289,6 +329,9 @@ define(['text!html/datapage.1.html', 'core/fragment', 'ukang-app', 'pop-page', '
                     config.showUnit = "";
                     if (config && _.isEmpty(config.unitDisp)) config.showUnit = "hidden";
                     fragment.load(tpl, config, this.onLayoutLoaded.bind(this));
+                },
+                refreshView: function() {
+                    $('.uk-data-period-selected').trigger('click');
                 }
             };
 

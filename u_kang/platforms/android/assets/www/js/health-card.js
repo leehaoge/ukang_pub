@@ -219,6 +219,9 @@ define(['text!html/healthcard.html', 'ukang-app', 'core/core', 'core/fragment', 
                 },
                 "sleepace-pillow": function() {
                     sleepacePillow.show(module.el);
+                },
+                "refresh-view": function() {
+                    dataPage1.refreshView();
                 }
             };
 

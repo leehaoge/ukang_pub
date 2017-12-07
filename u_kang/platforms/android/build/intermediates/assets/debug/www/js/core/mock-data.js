@@ -27,7 +27,11 @@ define(['core/core'], function (CORE) {
                         return;
                     }
                 }
-                var filtered = _.where(this.data, filter);
+                var filtered;
+                if (this.getEx && $.isFunction(this.getEx) && this.isEx && $.isFunction(this.isEx) && this.isEx(filter)) {
+                    filtered = this.getEx(filter);
+                } else
+                    filtered = _.where(this.data, filter);
                 onData(filtered);
             }
         }
