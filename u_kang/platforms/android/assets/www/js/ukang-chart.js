@@ -207,6 +207,12 @@ define(['Raphael', 'core/context', 'ukang-utils'], function (Raphael, context, U
             axisDisplay: {
                 x: ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
             },
+            calculateCoordinates: function(chart, sample) {
+                var day = UTILS.DateUtils.parse(sample.date).getDay(), pt = {};
+                pt.x = 0 | (chart.Axis.xZero + (day + 0.5) * this.part.x);
+                pt.y = 0 | (chart.Axis.yZero + 1 - (sample.value1 - chart.vAxis.min) * this.part.y / chart.vAxis.step);
+                return pt;
+            },
             initialize: function (chart) {
                 var d = new Date();
                 d.setDate(d.getDate() - d.getDay());
@@ -217,9 +223,7 @@ define(['Raphael', 'core/context', 'ukang-utils'], function (Raphael, context, U
                 commonDrawAxises(this, chart);
             },
             drawChart: function (chart) {
-                if (!_.isEmpty(chart.chartData)) {
-                    
-                }
+                commonDrawDotChart(this, chart);
             },
         },
         'm': {
@@ -237,6 +241,12 @@ define(['Raphael', 'core/context', 'ukang-utils'], function (Raphael, context, U
             },
             axisDisplay: {
                 x: []
+            },
+            calculateCoordinates: function(chart, sample) {
+                var vX = parseInt(sample.date.substr(8, 2)), pt = {};
+                pt.x = 0 | (chart.Axis.xZero + (vX - 0.5) * this.part.x);
+                pt.y = 0 | (chart.Axis.yZero + 1 - (sample.value1 - chart.vAxis.min) * this.part.y / chart.vAxis.step);
+                return pt;
             },
             initialize: function (chart) {
                 var d = new Date(),
@@ -262,9 +272,7 @@ define(['Raphael', 'core/context', 'ukang-utils'], function (Raphael, context, U
                 commonDrawAxises(this, chart);
             },
             drawChart: function (chart) {
-                if (!_.isEmpty(chart.chartData)) {
-                    
-                }
+                commonDrawDotChart(this, chart);
             },
 
         },
@@ -285,6 +293,12 @@ define(['Raphael', 'core/context', 'ukang-utils'], function (Raphael, context, U
             axisDisplay: {
                 x: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
             },
+            calculateCoordinates: function(chart, sample) {
+                var vX = parseInt(sample.date.substr(5, 2)), pt = {};
+                pt.x = 0 | (chart.Axis.xZero + (vX - 0.5) * this.part.x);
+                pt.y = 0 | (chart.Axis.yZero + 1 - (sample.value1 - chart.vAxis.min) * this.part.y / chart.vAxis.step);
+                return pt;
+            },
             initialize: function (chart) {
                 this.axisDisplay.title = UTILS.DateUtils.format(new Date(), 'yyyy年');
                 commonAxisInitilize(this, chart);
@@ -293,9 +307,7 @@ define(['Raphael', 'core/context', 'ukang-utils'], function (Raphael, context, U
                 commonDrawAxises(this, chart);
             },
             drawChart: function (chart) {
-                if (!_.isEmpty(chart.chartData)) {
-
-                }
+                commonDrawDotChart(this, chart);
             },
 
         }

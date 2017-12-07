@@ -1,4 +1,4 @@
-#Fri Dec 08 00:45:38 CST 2017
+#Fri Dec 08 01:04:52 CST 2017
 base.0=E\:\\ukang\\dev\\u_kang\\platforms\\android\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
 renamed.0=classes.dex
 file.0=E\:\\ukang\\dev\\u_kang\\platforms\\android\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex

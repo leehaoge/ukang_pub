@@ -28,20 +28,162 @@ define(['text!html/datapage.1.html', 'core/fragment', 'ukang-app', 'pop-page', '
                             date: '2017-12-07 14:15',
                             value1: '69'
                         },
-                        {
-                            date: '2017-12-07 18:10',
-                            value1: '85'
-                        },
                     ]
                 },
                 w: {
-                    data: []
+                    data: [{
+                            date: '2017-12-07 10:23',
+                            value1: '75'
+                        },
+                        {
+                            date: '2017-12-07 07:20',
+                            value1: '64'
+                        },
+                        {
+                            date: '2017-12-07 13:13',
+                            value1: '72'
+                        },
+                        {
+                            date: '2017-12-07 14:15',
+                            value1: '69'
+                        },
+                        {
+                            date: '2017-12-03 18:10',
+                            value1: '67'
+                        },
+                        {
+                            date: '2017-12-03 09:10',
+                            value1: '72'
+                        },
+                        {
+                            date: '2017-12-04 18:10',
+                            value1: '71'
+                        },
+                        {
+                            date: '2017-12-04 18:10',
+                            value1: '77'
+                        },
+                        {
+                            date: '2017-12-04 18:10',
+                            value1: '81'
+                        },
+                        {
+                            date: '2017-12-05 18:10',
+                            value1: '80'
+                        },
+                        {
+                            date: '2017-12-06 18:10',
+                            value1: '66'
+                        },
+                        {
+                            date: '2017-12-06 18:10',
+                            value1: '74'
+                        },
+                    ]
                 },
                 m: {
-                    data: []
+                    data: [{
+                            date: '2017-12-07 10:23',
+                            value1: '75'
+                        },
+                        {
+                            date: '2017-12-07 07:20',
+                            value1: '64'
+                        },
+                        {
+                            date: '2017-12-07 13:13',
+                            value1: '72'
+                        },
+                        {
+                            date: '2017-12-07 14:15',
+                            value1: '69'
+                        },
+                        {
+                            date: '2017-12-03 18:10',
+                            value1: '67'
+                        },
+                        {
+                            date: '2017-12-03 09:10',
+                            value1: '72'
+                        },
+                        {
+                            date: '2017-12-04 18:10',
+                            value1: '71'
+                        },
+                        {
+                            date: '2017-12-04 18:10',
+                            value1: '77'
+                        },
+                        {
+                            date: '2017-12-04 18:10',
+                            value1: '81'
+                        },
+                        {
+                            date: '2017-12-05 18:10',
+                            value1: '80'
+                        },
+                        {
+                            date: '2017-12-06 18:10',
+                            value1: '66'
+                        },
+                        {
+                            date: '2017-12-06 18:10',
+                            value1: '74'
+                        },
+
+                    ]
                 },
                 y: {
-                    data: []
+                    data: [{
+                            date: '2017-12-07 10:23',
+                            value1: '75'
+                        },
+                        {
+                            date: '2017-12-07 07:20',
+                            value1: '64'
+                        },
+                        {
+                            date: '2017-12-07 13:13',
+                            value1: '72'
+                        },
+                        {
+                            date: '2017-12-07 14:15',
+                            value1: '69'
+                        },
+                        {
+                            date: '2017-12-03 18:10',
+                            value1: '67'
+                        },
+                        {
+                            date: '2017-12-03 09:10',
+                            value1: '72'
+                        },
+                        {
+                            date: '2017-12-04 18:10',
+                            value1: '71'
+                        },
+                        {
+                            date: '2017-12-04 18:10',
+                            value1: '77'
+                        },
+                        {
+                            date: '2017-12-04 18:10',
+                            value1: '81'
+                        },
+                        {
+                            date: '2017-12-05 18:10',
+                            value1: '80'
+                        },
+                        {
+                            date: '2017-12-06 18:10',
+                            value1: '66'
+                        },
+                        {
+                            date: '2017-12-06 18:10',
+                            value1: '74'
+                        },
+
+                    ]
                 }
             };
 
@@ -49,11 +191,12 @@ define(['text!html/datapage.1.html', 'core/fragment', 'ukang-app', 'pop-page', '
             if (fakeData[chartId]) {
                 var ret = fakeData[chartId];
                 if (ret['data'] && !_.isEmpty(ret['data'])) {
-                    var dMin = _.min(ret.data, function(itm) {
-                        return itm.value1;
-                    }), dMax = _.max(ret.data, function(itm) {
-                        return itm.value1;
-                    });
+                    var dMin = _.min(ret.data, function (itm) {
+                            return itm.value1;
+                        }),
+                        dMax = _.max(ret.data, function (itm) {
+                            return itm.value1;
+                        });
                     ret.min = dMin.value1;
                     ret.max = dMax.value1;
                 }
@@ -62,7 +205,7 @@ define(['text!html/datapage.1.html', 'core/fragment', 'ukang-app', 'pop-page', '
             return {
                 data: []
             }
-        }            
+        }
 
 
         var pageEl,
@@ -73,15 +216,13 @@ define(['text!html/datapage.1.html', 'core/fragment', 'ukang-app', 'pop-page', '
                 showChart: function (chartId) {
                     var chartData = getChartData(chartId);
                     var chart = new UKangChart();
-                    chart.initialize(document.getElementById('ukang-chart-pane'), 
-                            chartId, charFeatures);
+                    chart.initialize(document.getElementById('ukang-chart-pane'),
+                        chartId, charFeatures);
                     chart.drawChart(chartData);
                 },
                 onLayoutLoaded: function () {
                     var self = this,
                         appModule = ukApp.currentModule();
-
-                    this.charts = {};
 
                     if (appModule && appModule.config && appModule.config.pageFrom) {
                         $('#name-back-to').html(appModule.config.pageFrom.display);
