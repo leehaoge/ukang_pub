@@ -1,26 +1,6 @@
-define(['text!html/datapage.html', 'core/fragment', 'ukang-app', 'chart', 'pop-page'],
-    function (tpl, Fragment, ukApp, Chart, popPage) {
+define(['text!html/datapage.html', 'core/fragment', 'ukang-app', 'pop-page'],
+    function (tpl, Fragment, ukApp, popPage) {
         'use strict';
-
-        // var chartData = {
-        //     labels : ["January","February","March","April","May","June","July"],
-        //     datasets : [
-        //         {
-        //             fillColor : "rgba(220,220,220,0.5)",
-        //             strokeColor : "rgba(220,220,220,1)",
-        //             pointColor : "rgba(220,220,220,1)",
-        //             pointStrokeColor : "#fff",
-        //             data : [65,59,90,81,56,55,40]
-        //         },
-        //         {
-        //             fillColor : "rgba(151,187,205,0.5)",
-        //             strokeColor : "rgba(151,187,205,1)",
-        //             pointColor : "rgba(151,187,205,1)",
-        //             pointStrokeColor : "#fff",
-        //             data : [28,48,40,19,96,27,100]
-        //         }
-        //     ]
-        // };
 
         var pageEl,
             config = {
@@ -66,27 +46,6 @@ define(['text!html/datapage.html', 'core/fragment', 'ukang-app', 'chart', 'pop-p
                         });
                     });
 
-
-                    // var ctx = document.getElementById('data-chart').getContext('2d');
-
-                    // var myChart = new Chart(ctx,{
-                    //     type: 'line',
-                    //     data: {
-                    //         datasets: [{
-                    //             label: 'First dataset',
-                    //             data: [0, 20, 40, 50]
-                    //         }],
-                    //         labels: ['January', 'February', 'March', 'April']
-                    //     },
-                    //     options: {
-                    //         scale: {
-                    //             ticks: {
-                    //                 suggestedMin: 50,
-                    //                 suggestedMax: 100
-                    //             }
-                    //         }
-                    //     }
-                    // });
                 },
                 show: function (mdlEl, dataName) {
                     pageEl = mdlEl;

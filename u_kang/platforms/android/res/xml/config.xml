@@ -10,6 +10,9 @@
     <feature name="SleepacePlugin">
         <param name="android-package" value="com.lec.u_kang.SleepacePlugin" />
     </feature>
+    <feature name="UkangUtilsPlugin">
+        <param name="android-package" value="com.lec.u_kang.UkangUtilsPlugin" />
+    </feature>
     <name>U康</name>
     <description>
         U康健康平台

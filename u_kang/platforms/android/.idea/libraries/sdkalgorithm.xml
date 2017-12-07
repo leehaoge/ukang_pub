@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="sdkalgorithm">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/sdkalgorithm.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

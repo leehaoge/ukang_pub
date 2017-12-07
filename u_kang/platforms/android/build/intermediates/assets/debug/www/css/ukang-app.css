@@ -582,6 +582,7 @@ a.uk-link-2:hover {
 
 .uk-chart-pane {
     text-shadow: none;
+    height: 220px;
 }
 
 .uk-chart-pane img {

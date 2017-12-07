@@ -1,0 +1,13 @@
+{
+    "name": "ukang-plugin-utils",
+    "version": "0.3.0",
+    "description": "UKANG Miscellaneous Utilities",
+    "cordova": {
+      "id": "ukang-plugin-utils",
+      "platforms": [
+        "android"
+      ]
+    },
+    "author": "Lanny Lee"
+  }
+  

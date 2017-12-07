@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" id="ukang-plugin-utils" version="0.3.0">
+  <engines>
+    <engine name="cordova-plugman" version=">=5.0.0" />
+    <engine name="cordova-android" version=">=5.0.0" />
+  </engines>
+  <name>ukang misc utils</name>
+  <description>miscellaneous utilities for ukang application</description>
+  <author>Lanny Lee</author>
+  <keywords>ukang,utils,utilities,cordova</keywords>
+  <license>MIT</license>
+  <js-module src="www/ukang-misc-utils.js" name="ukangMiscUtils">
+    <clobbers target="UkangMiscUtils" />
+  </js-module>
+  <platform name="android">
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="UkangUtilsPlugin">
+        <param name="android-package" value="com.lec.u_kang.UkangUtilsPlugin" />
+      </feature>
+    </config-file>
+    <!--  -->
+    <source-file src="src/android/UkangUtilsPlugin.java" target-dir="src/com/lec/u_kang" />
+  </platform>
+</plugin>

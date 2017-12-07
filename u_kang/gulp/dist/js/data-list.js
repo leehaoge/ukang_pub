@@ -36,7 +36,8 @@ define(['text!html/datalist.html', 'core/fragment', 'ukang-app'], function (tpl,
             show: function (el, dataName) {
                 pageEl = el;
                 var fragment = new Fragment(pageEl);
-                config = ukApp.cache['types'][dataName];
+                // config = ukApp.cache['types'][dataName];
+                config = ukApp.typeData.indexed[dataName];
                 fragment.load(tpl, config, onLayoutLoaded)
                 $(pageEl).trigger('create');
             }

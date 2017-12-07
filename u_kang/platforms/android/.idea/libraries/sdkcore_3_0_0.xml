@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="sdkcore_3.0.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/sdkcore_3.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

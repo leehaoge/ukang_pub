@@ -15,6 +15,9 @@
     },
     "ukang-plugin-sleepace": {
       "PACKAGE_NAME": "com.lec.u_kang"
+    },
+    "ukang-plugin-utils": {
+      "PACKAGE_NAME": "com.lec.u_kang"
     }
   },
   "dependent_plugins": {}

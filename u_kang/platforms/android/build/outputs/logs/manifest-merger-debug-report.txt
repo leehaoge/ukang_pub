@@ -73,7 +73,7 @@ ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:9:17-77
 		ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:9:27-74
 uses-sdk
 ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:13:5-74
-MERGED from [org.apache.cordova:CordovaLib:6.3.0:debug] E:\ukang\dev\u_kang\platforms\android\build\intermediates\exploded-aar\org.apache.cordova\CordovaLib\6.3.0\debug\AndroidManifest.xml:25:5-44
+MERGED from [org.apache.cordova:CordovaLib:6.3.0:debug] E:\ukang\dev\u_kang\platforms\android\CordovaLib\build\intermediates\bundles\debug\AndroidManifest.xml:25:5-44
 	android:targetSdkVersion
 		ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:13:42-71
 	android:minSdkVersion

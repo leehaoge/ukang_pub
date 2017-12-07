@@ -211,8 +211,14 @@ define(['core/core', 'core/context', 'core/data-store', 'ukang-utils', 'ukang-co
                  * 初始化
                  */
                 initialize: function () {
-                    if (window.app.inDevice) prepareDb.execute();
-                    else context['status'] = 'prepared';
+                    if (window.app.inDevice) {
+                        if (window.UkangMiscUtils) {
+                            window.UkangMiscUtils.getDensity(function(msg) {
+                                context['app'].density = msg.density;
+                            });
+                        }
+                        prepareDb.execute();
+                    } else context['status'] = 'prepared';
 
                     var self = this,
                         doneTypes = function (data) {

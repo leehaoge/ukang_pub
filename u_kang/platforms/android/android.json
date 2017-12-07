@@ -19,6 +19,10 @@
             {
               "xml": "<feature name=\"SleepacePlugin\"><param name=\"android-package\" value=\"com.lec.u_kang.SleepacePlugin\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"UkangUtilsPlugin\"><param name=\"android-package\" value=\"com.lec.u_kang.UkangUtilsPlugin\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -52,6 +56,9 @@
     },
     "ukang-plugin-sleepace": {
       "PACKAGE_NAME": "com.lec.u_kang"
+    },
+    "ukang-plugin-utils": {
+      "PACKAGE_NAME": "com.lec.u_kang"
     }
   },
   "dependent_plugins": {},
@@ -71,11 +78,20 @@
       "clobbers": [
         "SleepacePillow"
       ]
+    },
+    {
+      "id": "ukang-plugin-utils.ukangMiscUtils",
+      "file": "plugins/ukang-plugin-utils/www/ukang-misc-utils.js",
+      "pluginId": "ukang-plugin-utils",
+      "clobbers": [
+        "UkangMiscUtils"
+      ]
     }
   ],
   "plugin_metadata": {
     "cordova-plugin-whitelist": "1.3.2",
     "cordova-sqlite-storage": "2.1.0",
-    "ukang-plugin-sleepace": "0.3.0"
+    "ukang-plugin-sleepace": "0.3.0",
+    "ukang-plugin-utils": "0.3.0"
   }
 }

@@ -4,6 +4,7 @@ define(['core/context', 'ukang-app', 'mainframe', 'text!html/mainframe.html'],
 
         context['status'] = 'starting';
         context['app'] = context['app'] || {};
+        context['app'].density = 1.7;
         context['app'].navbarHeight = 52;
 
 

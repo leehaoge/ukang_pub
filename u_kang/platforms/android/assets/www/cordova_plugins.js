@@ -15,6 +15,14 @@ module.exports = [
     "clobbers": [
       "SleepacePillow"
     ]
+  },
+  {
+    "id": "ukang-plugin-utils.ukangMiscUtils",
+    "file": "plugins/ukang-plugin-utils/www/ukang-misc-utils.js",
+    "pluginId": "ukang-plugin-utils",
+    "clobbers": [
+      "UkangMiscUtils"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -22,7 +30,8 @@ module.exports.metadata =
 {
   "cordova-plugin-whitelist": "1.3.2",
   "cordova-sqlite-storage": "2.1.0",
-  "ukang-plugin-sleepace": "0.3.0"
+  "ukang-plugin-sleepace": "0.3.0",
+  "ukang-plugin-utils": "0.3.0"
 };
 // BOTTOM OF METADATA
 });
