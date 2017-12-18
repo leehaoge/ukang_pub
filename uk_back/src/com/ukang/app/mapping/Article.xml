@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ukang.app.dao.ArticleDao">
+
+	<resultMap type="Article" id="articleList">
+		<id column="a_id" property="id" />
+		<result column="title" property="title" />
+		<result column="pub_date" property="pubDate" />
+		<result column="author" property="author" />
+		<result column="keywords" property="keywords" />
+		<result column="main_image" property="mainImage" />
+		<result column="content" property="content" />
+		<result column="upd_date" property="updDate" />
+
+		<association property="type" javaType="ArticleType">
+			<id column="type_id" property="id" />
+			<result column="t_name" property="name"/>
+		</association>
+		
+		<association property="inpUser" javaType="User">
+			<id column="inp_user" property="id" />
+			<result column="user_name" property="userName" />
+		</association>		
+	</resultMap>
+	
+	<resultMap id="map" type="HashMap">
+	</resultMap>
+
+	<sql id="articleSQL">
+		SELECT a.*, t.t_name, u.user_name FROM uk_articles a 
+			LEFT OUTER JOIN uk_artypes t ON a.type_id = t.at_id
+			LEFT OUTER JOIN uk_user u ON a.inp_user = u.u_id 
+	</sql>
+
+
+	<select id="selectById" resultMap="articleList">
+		<include refid="articleSQL" />
+		WHERE a.a_id = #{id}
+	</select>
+
+	
+	<select id="selectAll" resultMap="articleList">
+		<include refid="articleSQL" />
+	</select>
+
+	<select id="selectByType" resultMap="articleList">
+		<include refid="articleSQL" />
+		WHERE a.type_id = #{typeId} 
+	</select>
+	
+	<select id="selectLatest" resultMap="articleList">
+		<include refid="articleSQL" />
+		<![CDATA[
+			WHERE a.main_image IS NOT NULL AND a.main_image <> ''
+			ORDER BY a.pub_date DESC
+			LIMIT 0,#{rowCount}	
+		]]>
+	</select>
+	
+	<select id="selectLatestOfType" resultMap="articleList">
+		<include refid="articleSQL" />
+		<![CDATA[
+			WHERE a.type_id = #{typeId}
+			ORDER BY a.pub_date DESC
+			LIMIT 0,#{rowCount}	
+		]]>
+	</select>
+
+	<select id="selectValidTypes" resultMap="map">
+		SELECT DISTINCT type_id typeId FROM uk_articles
+		ORDER BY type_id
+	</select>
+	
+	<insert id="insert" parameterType="Article"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO uk_articles
+		(a_id,title,pub_date,author,keywords,main_image,content,type_id,upd_date,inp_user)
+		VALUES
+		(#{id},#{title},#{pubDate},#{author},#{keywords},#{mainImage},#{content},#{type.id},#{updDate},#{inpUser.id})
+	</insert>	
+
+</mapper>

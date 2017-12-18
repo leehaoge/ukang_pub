@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ukang.app.dao.ResourceDao">
+	
+	<resultMap type="Resource" id="resourceList">
+		<id column="r_id" property="id"/>
+		<result column="path_name" property="pathName"/>
+		<result column="file_name" property="fileName"/>
+		<result column="mime" property="mime"/>
+	</resultMap>
+
+
+	<insert id="insert" parameterType="Resource"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO uk_resources
+		(r_id,path_name,file_name,mime)
+		VALUES
+		(#{id},#{pathName},#{fileName},#{mime})
+	</insert>	
+
+	<select id="selectByPath" resultMap="resourceList">
+		SELECT * FROM uk_resources
+		WHERE path_name = #{path}
+	</select> 
+
+</mapper>

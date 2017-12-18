@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ukang.app.dao.UserDao">
+	<resultMap type="User" id="userList">
+        <result column="u_id" property="id" />
+        <result column="user_name" property="userName" />
+        <result column="password" property="password" />
+        <result column="u_type" property="userType" />
+	</resultMap>
+	
+	<select id="selectByName" resultMap="userList">
+	SELECT * FROM uk_user WHERE user_name = #{name}
+	</select>
+
+</mapper>
