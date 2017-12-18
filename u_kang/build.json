@@ -1,0 +1,10 @@
+{
+    "android": {
+        "release": {
+            "keystore": "release-key.keystore",
+            "alias": "ukang-app",
+            "storePassword": "ukang2017",
+            "password": "ukang2017"
+        }
+    }
+}

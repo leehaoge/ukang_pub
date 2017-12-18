@@ -92,6 +92,8 @@ define(['text!html/bluetoothscan.html', 'core/fragment', 'ukang-app', 'sleepace-
             module = {
                 show: function (el, config) {
                     var fragment = new Fragment(el);
+                    config = config || {};
+                    config.backLocation = '睡眠状况';
                     fragment.load(tpl, config, moduleLoaded);
                 }
             };

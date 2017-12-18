@@ -1,8 +1,9 @@
 /***
  * APP数据逻辑处理 
  **/
-define(['core/core', 'core/context', 'core/data-store', 'ukang-utils', 'ukang-constants', 'type-data', 'prepare-db'],
-    function (CORE, context, dataStore, UTILS, CONSTS, typeData, prepareDb) {
+define(['core/core', 'core/context', 'core/data-store', 'ukang-utils', 'ukang-constants', 'type-data', 'prepare-db',
+    'ukang-article-ajax'],
+    function (CORE, context, dataStore, UTILS, CONSTS, typeData, prepareDb, articleAjaxHandler) {
         'use strict';
 
         var appDataReady = false,
@@ -198,11 +199,25 @@ define(['core/core', 'core/context', 'core/data-store', 'ukang-utils', 'ukang-co
                 },
                 updatePersonInfo: function(params, onSuccess) {
                     dataStore.set('APP用户', {id: params.id}, params, onSuccess);
+                },
+                subHandlers: {
+                    articleAjax: articleAjaxHandler
                 }
             },
             callDataHandler = function (type, params, onData) {
-                var handler = dataHandler[type];
-                if (handler && $.isFunction(handler)) handler.call(dataHandler, params, onData);
+                function foundHandler(aContainer) {
+                    var handler = aContainer[type],
+                        found = handler && $.isFunction(handler);
+                    if (found) handler.call(dataHandler, params, onData);
+                    return found;
+                }
+
+                if (!foundHandler(dataHandler)) {
+                    for (var i in dataHandler['subHandlers']) {
+                        var subHandler = dataHandler['subHandlers'][i];
+                        if (foundHandler(subHandler)) break;
+                    }
+                }
             },
             ukApp = {
                 cache: {},
@@ -268,6 +283,18 @@ define(['core/core', 'core/context', 'core/data-store', 'ukang-utils', 'ukang-co
                 do: function () {
                     this.get.apply(this, arguments);
                 },
+                resourcePath: function(path) {
+                    return CONSTS['ajax_root'] + '/app/resource' + CONSTS['ajax_ext'] +'?path=' + encodeURI(path) ; 
+                },
+                // ajax: function(method, url, data, success) {
+                //     $.ajax({
+                //         url: CONSTS['ajax_root'] + url,
+                //         data: data,
+                //         type: method,
+                //         dataType: 'json',
+                //         success: success
+                //     });
+                // },
                 currentModule: function () {
                     return context['current_module'];
                 },

@@ -23,6 +23,8 @@ define([], function () {
         "TB_APP用户": 'app_user',
         //----------------------
 
+        "ajax_root": 'http://192.168.31.58:8085/ukang',
+        "ajax_ext": '.htmls',
 
         //-----------------------------
         DUMMY: ''

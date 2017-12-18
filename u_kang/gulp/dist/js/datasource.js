@@ -1,5 +1,5 @@
-define(['text!html/datasource.html', 'core/base-module', 'add-device', 'app-source', 'device-source'],
-    function (tpl, BaseModule, addDevice, appSource, deviceSource) {
+define(['text!html/datasource.html', 'core/base-module', 'add-device', 'app-source', 'device-source', 'bluetooth-scan.1'],
+    function (tpl, BaseModule, addDevice, appSource, deviceSource, scanBluetoothDevice) {
         'use strict';
 
 
@@ -34,6 +34,9 @@ define(['text!html/datasource.html', 'core/base-module', 'add-device', 'app-sour
             },
             "device-source": function (config) {
                 deviceSource.show(module.el, config);
+            },
+            "add-bluetooth-device": function() {
+                scanBluetoothDevice.show(module.el);
             }
         };
 

@@ -1,0 +1,27 @@
+<div class="ui-grid-b uk-nav-bar">
+    <div class="ui-block-a">
+        <a id="ln-articles" href="#" class="uk-link-1">
+            <img src="img/carat-l-red.png">专家讲堂
+        </a>
+    </div>
+    <div class="ui-block-b text-center uk-frame-title">
+    </div>
+    <div class="ui-block-c text-right">
+    </div>
+
+</div>
+
+<div class="uk-module-frame">
+    <div id="article-pane">
+        <h1><%=title%></h1>
+        <div class="ui-grid-a">
+            <div class="ui-block-a">作者:<%=author%></div>
+            <div class="ui-block-b text-right">发布时间:<%=pubDate%></div>
+        </div>
+        <%=mainImageHtml%>
+        <div class="uk-article-content">
+        <%=content%>            
+        </div>
+    </div>
+    <div class="sep_v_10"></div>
+</div>

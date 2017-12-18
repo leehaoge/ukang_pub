@@ -7,6 +7,9 @@ define(['text!html/adddevice.html', 'core/fragment', 'ukang-app'], function (tpl
             $('#ln-ds-main').click(function () {
                 appModule.navigate("");
             });
+            $('.uk-device-item').click(function() {
+                appModule.navigate('add-bluetooth-device');
+            });
         },
         module = {
             show: function (el) {
