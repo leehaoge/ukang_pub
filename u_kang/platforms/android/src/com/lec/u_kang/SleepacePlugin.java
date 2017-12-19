@@ -44,6 +44,7 @@ public class SleepacePlugin extends CordovaPlugin {
 	public SleepacePlugin() {
 	}
 
+	@Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
 		mBluetoothManager = (BluetoothManager) cordova.getActivity().getSystemService(Context.BLUETOOTH_SERVICE);
 		mBluetoothAdapter = mBluetoothManager.getAdapter();
