@@ -1,6 +1,7 @@
 package com.lec.u_kang;
 
 import android.app.Activity;
+import android.widget.Toast;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
@@ -46,9 +47,12 @@ public class UkangUtilsPlugin extends CordovaPlugin {
 		boolean status = true;
 
 		switch (action) {
-		case getDensity:
-			getDensity(cbc);
-			break;
+			case getDensity:
+				getDensity(cbc);
+				break;
+			case toast:
+				Toast.makeText(mActivity, args.getString(0), Toast.LENGTH_SHORT).show();
+				break;
 		}
 		return status;
 	}
@@ -60,7 +64,8 @@ public class UkangUtilsPlugin extends CordovaPlugin {
 	}
 
 	private static enum Action {
-		getDensity
+		getDensity,
+		toast
 	}
 	
 }

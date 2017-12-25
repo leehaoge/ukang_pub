@@ -283,6 +283,13 @@ define(['core/core', 'core/context', 'core/data-store', 'ukang-utils', 'ukang-co
                 do: function () {
                     this.get.apply(this, arguments);
                 },
+                toast: function(msg) {
+                    if (window.UkangMiscUtils && window.UkangMiscUtils.toast) {
+                        window.UkangMiscUtils.toast(msg);
+                    } else {
+                        alert(msg);
+                    }
+                },
                 resourcePath: function(path) {
                     return CONSTS['ajax_root'] + '/app/resource' + CONSTS['ajax_ext'] +'?path=' + encodeURI(path) ; 
                 },

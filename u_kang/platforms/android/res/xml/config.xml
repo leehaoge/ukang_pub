@@ -13,6 +13,9 @@
     <feature name="UkangUtilsPlugin">
         <param name="android-package" value="com.lec.u_kang.UkangUtilsPlugin" />
     </feature>
+    <feature name="UkangUrionPlugin">
+        <param name="android-package" value="com.lec.u_kang.UrionPlugin" />
+    </feature>
     <name>U康</name>
     <description>
         U康健康平台

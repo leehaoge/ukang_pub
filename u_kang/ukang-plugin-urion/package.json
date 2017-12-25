@@ -1,0 +1,13 @@
+{
+    "name": "ukang-plugin-urion",
+    "version": "0.4.0",
+    "description": "UKang Plugin for Urion BP",
+    "cordova": {
+      "id": "ukang-plugin-urion",
+      "platforms": [
+        "android"
+      ]
+    },
+    "author": "Lanny Lee"
+  }
+  

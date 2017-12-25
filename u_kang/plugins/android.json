@@ -18,6 +18,9 @@
     },
     "ukang-plugin-utils": {
       "PACKAGE_NAME": "com.lec.u_kang"
+    },
+    "ukang-plugin-urion": {
+      "PACKAGE_NAME": "com.lec.u_kang"
     }
   },
   "dependent_plugins": {}

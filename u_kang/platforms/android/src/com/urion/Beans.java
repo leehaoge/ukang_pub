@@ -102,6 +102,7 @@ public class Beans {
         public final static int MESSAGE = 1;
         public final static int ERROR = 2;
         public final static int PRESSURE = 3;
+        public final static int RESULT = 4;
         public Head head;
 
         public IBean() {

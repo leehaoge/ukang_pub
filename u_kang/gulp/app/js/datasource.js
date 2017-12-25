@@ -1,28 +1,95 @@
-define(['text!html/datasource.html', 'core/base-module', 'add-device', 'app-source', 'device-source', 'bluetooth-scan.1'],
-    function (tpl, BaseModule, addDevice, appSource, deviceSource, scanBluetoothDevice) {
+define(['text!html/datasource.html', 'core/base-module', 'add-device', 'app-source', 'device-source', 'bluetooth-scan.1', 'ukang-devices',
+        'ukang-constants', 'device-bp'
+    ],
+    function (tpl, BaseModule, addDevice, appSource, deviceSource, scanBluetoothDevice, deviceManager,
+        CONSTS, deviceBp) {
         'use strict';
 
+        var templates = {
+            'noDevice': '<h1>暂无设备</h1>',
+            'deviceList': '\
+        <ul class="ds-device-list">\
+        <%=list%>\
+        </ul>\
+            ',
+            'device': '\
+            <li class="ds-device-item" data-id="<%=type%>">\
+                <h3><%=name%></h3>\
+                <p>设备号：<%=modelName%></p>\
+                <%=extra%>\
+            </li>\
+            ',
+        };
 
         var module = new BaseModule();
 
         var loaded = function () {
+            var $deviceDiv = $('#ds-pane-devices'),
+                $applicationDiv = $('#ds-pane-applications');
             $('#ln-add-source').click(function () {
                 module.navigate('add-device');
             });
-            $('.uk-app-source-link').click(function () {
-                //APP来源点击
-                module.navigate('app-source', {
-                    name: $(this).attr('data-id')
-                });
+            $('#switch-device').click(function () {
+                $applicationDiv.addClass('hidden');
+                $deviceDiv.removeClass('hidden');
+                $(this).addClass('uk-selected-datasource');
+                $('#switch-application').removeClass('uk-selected-datasource');
             });
-            $('.uk-device-source-link').click(function () {
-                //设备来源点击
-                var $this = $(this);
-                module.navigate('device-source', {
-                    name: $this.attr('data-id'),
-                    healthType: $this.attr('data-health-type') || ''
-                });
+            $('#switch-application').click(function () {
+                $deviceDiv.addClass('hidden');
+                $applicationDiv.removeClass('hidden');
+                $(this).addClass('uk-selected-datasource');
+                $('#switch-device').removeClass('uk-selected-datasource');
             });
+
+            function liClick() {
+                var $this = $(this),
+                    dataId = $this.attr('data-id'),
+                    device = deviceManager.get(dataId);
+                if (device) {
+                    module.navigate('device', device);
+                }
+            }
+
+            var devList = deviceManager.getList();
+            if (devList) {
+                if (devList.length == 0) {
+                    $deviceDiv.html(templates['noDevice']);
+                } else {
+                    var funcLine = _.template(templates['device']),
+                        funcList = _.template(templates['deviceList']),
+                        objList = {
+                            list: ''
+                        };
+                    for (var i in devList) {
+                        var device = devList[i];
+                        device.extra = '';
+                        if (!_.isEmpty(device['firmware_version']))
+                            device.extra += '<p>固件版本：' + device['firmware_version'] + '</p>';
+                        if (!_.isEmpty(device['power_level']))
+                            device.extra += '<p>电池容量：' + device['power_level'] + '%</p>';
+                        objList.list += funcLine(device);
+                    }
+                    $deviceDiv.html(funcList(objList));
+                    $('.ds-device-item').click(liClick);
+                }
+            }
+
+
+            // $('.uk-app-source-link').click(function () {
+            //     //APP来源点击
+            //     module.navigate('app-source', {
+            //         name: $(this).attr('data-id')
+            //     });
+            // });
+            // $('.uk-device-source-link').click(function () {
+            //     //设备来源点击
+            //     var $this = $(this);
+            //     module.navigate('device-source', {
+            //         name: $this.attr('data-id'),
+            //         healthType: $this.attr('data-health-type') || ''
+            //     });
+            // });
         };
 
         var pages = {
@@ -35,12 +102,18 @@ define(['text!html/datasource.html', 'core/base-module', 'add-device', 'app-sour
             "device-source": function (config) {
                 deviceSource.show(module.el, config);
             },
-            "add-bluetooth-device": function() {
+            "add-bluetooth-device": function () {
                 scanBluetoothDevice.show(module.el);
+            },
+            "device": function (config) {
+                if (config) {
+                    if (CONSTS["DEV_血压计"] === config.type) deviceBp.show(module.el, config);
+                }
             }
         };
 
         $.extend(module, {
+            activeTab: 'device',
             tpl: tpl,
             config: {},
             pages: pages,

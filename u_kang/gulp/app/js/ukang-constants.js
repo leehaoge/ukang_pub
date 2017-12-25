@@ -26,6 +26,12 @@ define([], function () {
         "ajax_root": 'http://192.168.31.58:8085/ukang',
         "ajax_ext": '.htmls',
 
+        "DEV_睡眠枕头": 'SleepPillow',
+        "DEV_睡眠纽扣": 'SleepButton',
+        "DEV_血压计": 'BP',
+        "DEV_体脂秤": 'BodyFatScale',
+        "DEV_血糖仪": 'BS',
+
         //-----------------------------
         DUMMY: ''
     };
