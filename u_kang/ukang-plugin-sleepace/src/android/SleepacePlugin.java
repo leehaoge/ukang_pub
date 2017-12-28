@@ -1,5 +1,7 @@
 package com.lec.u_kang;
 
+import java.util.HashMap;
+
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
@@ -26,7 +28,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.webkit.WebSettings.PluginState;
 
 public class SleepacePlugin extends CordovaPlugin {
 
@@ -43,6 +44,7 @@ public class SleepacePlugin extends CordovaPlugin {
 	public SleepacePlugin() {
 	}
 
+	@Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
 		mBluetoothManager = (BluetoothManager) cordova.getActivity().getSystemService(Context.BLUETOOTH_SERVICE);
 		mBluetoothAdapter = mBluetoothManager.getAdapter();
@@ -70,40 +72,56 @@ public class SleepacePlugin extends CordovaPlugin {
 		}
 	}
 
+	private boolean finding = false;
+	private BluetoothDevice mDevice = null;
+
 	private boolean executeAndPossiblyThrow(Action action, JSONArray args, CallbackContext cbc) throws JSONException {
 
 		boolean status = true;
+		boolean bluetoothEnabled = false;
 //		JSONObject o;
 //		String echo_value;
 //		String dbname;
 
 		switch (action) {
-		case startScan:
-			scanCallbackContext = cbc;
-			if (enableBluetooth()) scanBleDevice();
-			break;
-		case stopScan:
-			stopScan();
-			break;
-		case connect:
-			if (enableBluetooth()) connect(args, cbc);
-			break;
-		case disconnect:
-			disconnect();
-			break;
-		case startCollect:
-			startCollect(cbc);
-			break;
-		case stopCollect:
-			stopCollect(cbc);
-			break;
-		case startRealTimeData:
-			rtDataCallbackContext = cbc;
-			startRealTimeData(cbc);
-			break;
-		case stopRealTimeData:
-			stopRealTimeData(cbc);
-			break;
+			case findDevice:
+				finding = true;
+				bluetoothEnabled = enableBluetooth();
+				if (bluetoothEnabled) {
+					finding = true;
+					scanBleDevice();
+				}
+				break;
+			case startScan:
+				scanCallbackContext = cbc;
+				bluetoothEnabled = enableBluetooth();
+				if (bluetoothEnabled) {
+					finding = false;
+					scanBleDevice();
+				}
+				break;
+			case stopScan:
+				stopScan();
+				break;
+			case connect:
+				if (enableBluetooth()) connect(args, cbc);
+				break;
+			case disconnect:
+				disconnect();
+				break;
+			case startCollect:
+				startCollect(cbc);
+				break;
+			case stopCollect:
+				stopCollect(cbc);
+				break;
+			case startRealTimeData:
+				rtDataCallbackContext = cbc;
+				startRealTimeData(cbc);
+				break;
+			case stopRealTimeData:
+				stopRealTimeData(cbc);
+				break;
 		}
 		return status;
 	}
@@ -112,6 +130,8 @@ public class SleepacePlugin extends CordovaPlugin {
 	private boolean scanBleDevice(){
 		if (!mScanning) {
             mScanning = true;
+            btDevices.clear();
+			mDevice = null;
             mHandler.postDelayed(stopScanTask, scanTime);
             mBluetoothAdapter.startLeScan(mLeScanCallback);
             return true;
@@ -134,9 +154,19 @@ public class SleepacePlugin extends CordovaPlugin {
             if (mBluetoothAdapter != null && mLeScanCallback != null) {
                 mBluetoothAdapter.stopLeScan(mLeScanCallback);
             }
+            if (finding) {
+				//如果是搜索命名设备
+				if (mDevice == null && scanCallbackContext != null) {
+					scanCallbackContext.error("no device found");
+				}
+				finding = false;
+			}
+            scanCallbackContext = null;
         }
     }
 
+    private HashMap<String, BluetoothDevice> btDevices = new HashMap<String, BluetoothDevice>(); 
+    
     private final BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
         @Override
         public void onLeScan(final BluetoothDevice device, int rssi, final byte[] scanRecord) {// Z1-140900000
@@ -144,27 +174,95 @@ public class SleepacePlugin extends CordovaPlugin {
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
-					String modelName = device.getName();
-					if(modelName != null){
-						modelName = modelName.trim();
+					
+				String key = device.getAddress();
+				if (btDevices.containsKey(key)) return;
+				btDevices.put(key, device);
+
+				String modelName = device.getName();
+				if(modelName != null){
+					modelName = modelName.trim();
+				}
+				String deviceName = BleDeviceNameUtil.getBleDeviceName(0xff, scanRecord);
+				if (deviceName != null) {
+					deviceName = deviceName.trim();
+				}
+
+				final String fModelName = modelName;
+				final String fDeviceName = deviceName;
+
+				if (finding) {
+					if ("SLEEPACE P1".equals(modelName) || "SLEEPACE P2".equals(modelName)) {
+						//found device;
+						mDevice = device;
+						char c = modelName.charAt(modelName.length() - 1);
+						String deviceCode = "3-6";
+						int timeout = 10 * 1000;
+						if (c == '2') deviceCode = "3-5";
+
+						final String fDeviceCode = deviceCode;
+
+						try {
+							//尝试使用login
+							pillowHelper.login(deviceName, device.getAddress(), deviceCode, 1, timeout,
+                                    new IDataCallback<LoginBean>() {
+                                @Override
+                                public void onDataCallback(final CallbackData<LoginBean> cd) {
+                                    // TODO Auto-generated method stub
+                                    mActivity.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+											if(cd.isSuccess() && scanCallbackContext != null){
+												//可以正常login
+												JSONObject result = new JSONObject();
+												try {
+													result.put("modelName", fModelName);
+													result.put("address", device.getAddress());
+													result.put("deviceName", fDeviceName);
+													result.put("deviceId", fDeviceName);
+													result.put("deviceCode", fDeviceCode);
+
+													scanCallbackContext.success(result);
+
+													mHandler.postDelayed(new Runnable() {
+														@Override
+														public void run() {
+															pillowHelper.disconnect();
+															stopScan();
+														}
+													}, 50);
+
+												} catch (JSONException e) {
+													e.printStackTrace();
+												}
+											}
+                                        }
+                                    });
+
+                                }
+                            });
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
 					}
-		            String deviceName = BleDeviceNameUtil.getBleDeviceName(0xff, scanRecord);
-		            if(deviceName != null){
-		            	deviceName = deviceName.trim();
-		            }
-		            
-		            if(!TextUtils.isEmpty(modelName) && !TextUtils.isEmpty(deviceName)){
-		            	JSONObject result = new JSONObject();
-		            	try {
+				} else {
+
+					if (!TextUtils.isEmpty(modelName) && !TextUtils.isEmpty(deviceName)) {
+						JSONObject result = new JSONObject();
+						try {
 							result.put("modelName", modelName);
 							result.put("address", device.getAddress());
 							result.put("deviceName", deviceName);
 							result.put("deviceId", deviceName);
-							scanCallbackContext.success(result);
+
+							PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, result);
+							pluginResult.setKeepCallback(true);
+							scanCallbackContext.sendPluginResult(pluginResult);
 						} catch (JSONException e) {
 							scanCallbackContext.error(e.getMessage());
 						}
-		            }
+					}
+				}
 				}
 			});
         }
@@ -318,6 +416,7 @@ public class SleepacePlugin extends CordovaPlugin {
 	}		
 		
 	private static enum Action {
+		findDevice,
 		startScan, 
 		stopScan,
 		connect,

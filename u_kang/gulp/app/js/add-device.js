@@ -2,7 +2,11 @@ define(['text!html/adddevice.html', 'core/fragment', 'ukang-app', 'ukang-constan
 function (tpl, Fragment, ukApp, CONSTS, deviceManager) {
     'use strict';
 
-
+    /**
+     * 查找Urion血压计
+     * @param {*} onSuccess 
+     * @param {*} onFailure 
+     */
     function findBP(onSuccess, onFailure) {
         if (window.UkangUrionPlugin) {
             window.UkangUrionPlugin.findDevice(
@@ -13,6 +17,27 @@ function (tpl, Fragment, ukApp, CONSTS, deviceManager) {
                 },  
                 function(msg) {
                     if (msg === 'no device found') msg = '找不到血压计';
+                    ukApp.toast(msg);
+                }
+            );
+        }
+    }
+
+    /**
+     * 查找享睡健康枕
+     * @param {*} onSuccess 
+     * @param {*} onFailure 
+     */
+    function findPillow(onSuccess, onFailure) {
+        if (window.SleepacePillow) {
+            window.SleepacePillow.findDevice(
+                function(result) {
+                    deviceManager.register(CONSTS['DEV_睡眠枕头'], msg);
+                    ukApp.toast('已找到睡眠枕头');
+                    if (onSuccess) onSuccess();
+                },
+                function(msg) {
+                    if (msg === 'no device found') msg = '找不到睡眠枕头';
                     ukApp.toast(msg);
                 }
             );
@@ -35,7 +60,8 @@ function (tpl, Fragment, ukApp, CONSTS, deviceManager) {
             };
 
         if (dataId === CONSTS['DEV_血压计']) findBP(deviceFound);
-
+        else
+        if (dataId === CONSES['DEV_睡眠枕头']) findPillow(deviceFound);
     }
 
     var pageEl, config = {},

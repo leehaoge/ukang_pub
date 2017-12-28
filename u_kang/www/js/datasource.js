@@ -1,8 +1,8 @@
 define(['text!html/datasource.html', 'core/base-module', 'add-device', 'app-source', 'device-source', 'bluetooth-scan.1', 'ukang-devices',
-        'ukang-constants', 'device-bp'
+        'ukang-constants', 'ukang-app', 'device-bp', 'sleepace-pillow.1'
     ],
     function (tpl, BaseModule, addDevice, appSource, deviceSource, scanBluetoothDevice, deviceManager,
-        CONSTS, deviceBp) {
+        CONSTS, ukApp, deviceBp, sleepacePillow) {
         'use strict';
 
         var templates = {
@@ -108,6 +108,16 @@ define(['text!html/datasource.html', 'core/base-module', 'add-device', 'app-sour
             "device": function (config) {
                 if (config) {
                     if (CONSTS["DEV_血压计"] === config.type) deviceBp.show(module.el, config);
+                    else
+                    if (CONSTS["DEV_睡眠枕头"] === config.type) {
+                        sleepacePillow.connect(config, function () {
+                            consoleLog('睡眠枕头连接成功！', true);
+                            sleepacePillow.show(module.el);;
+                        }, function (error) {
+                            consoleLog('睡眠枕头连接失败！');
+                            ukApp.toast('无法连接睡眠枕头，是否没打开电源，或者离得太远了？');
+                        });
+                    }
                 }
             }
         };

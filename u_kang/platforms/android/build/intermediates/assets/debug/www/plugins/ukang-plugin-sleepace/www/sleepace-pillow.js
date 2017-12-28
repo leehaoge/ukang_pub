@@ -1,6 +1,9 @@
 cordova.define("ukang-plugin-sleepace.sleepacePillow", function(require, exports, module) {
 var sleepacePillowName = 'SleepacePlugin';
 var sleepacePillow = {
+    findDevice: function(successCallback, errorCallback, params) {
+        cordova.exec(successCallback, errorCallback, sleepacePillowName, "startScan", [params]);
+    },
     startScan: function(successCallback, errorCallback, params) {
         cordova.exec(successCallback, errorCallback, sleepacePillowName, "startScan", [params]);
     },
