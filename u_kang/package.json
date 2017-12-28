@@ -14,15 +14,17 @@
     "cordova-android": "^6.3.0",
     "cordova-plugin-whitelist": "^1.3.2",
     "cordova-sqlite-storage": "Cordova-sqlite-storage",
-    "ukang-plugin-utils": "file:ukang-plugin-utils",
-    "ukang-plugin-sleepace": "file:ukang-plugin-sleepace"
+    "ukang-plugin-sleepace": "file:ukang-plugin-sleepace",
+    "ukang-plugin-urion": "file:ukang-plugin-urion",
+    "ukang-plugin-utils": "file:ukang-plugin-utils"
   },
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {},
       "cordova-sqlite-storage": {},
       "ukang-plugin-sleepace": {},
-      "ukang-plugin-utils": {}
+      "ukang-plugin-utils": {},
+      "ukang-plugin-urion": {}
     },
     "platforms": [
       "android"

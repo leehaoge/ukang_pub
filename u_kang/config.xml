@@ -22,9 +22,10 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
-    <engine name="android" spec="^6.3.0" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.2" />
     <plugin name="cordova-sqlite-storage" spec="Cordova-sqlite-storage" />
     <plugin name="ukang-plugin-sleepace" spec="file:ukang-plugin-sleepace" />
     <plugin name="ukang-plugin-utils" spec="file:ukang-plugin-utils" />
+    <plugin name="ukang-plugin-urion" spec="file:ukang-plugin-urion" />
+    <engine name="android" spec="^6.3.0" />
 </widget>

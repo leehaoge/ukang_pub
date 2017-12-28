@@ -1,0 +1,10 @@
+var pluginName = 'UkangUtilsPlugin';
+var ukangMiscUtils = {
+    getDensity: function(successCallback, errorCallback) {
+        cordova.exec(successCallback, errorCallback, pluginName, "getDensity", []);
+    },
+    toast: function(params) {
+        cordova.exec(null, null, "toast", [params]);
+    }
+};
+module.exports = ukangMiscUtils;

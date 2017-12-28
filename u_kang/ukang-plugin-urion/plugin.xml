@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" id="ukang-plugin-urion" version="0.4.0">
+  <engines>
+    <engine name="cordova-plugman" version=">=5.0.0" />
+    <engine name="cordova-android" version=">=5.0.0" />
+  </engines>
+  <name>ukang plugin for urion BP</name>
+  <description>plugin for urion bluetooth blood pressure mechine</description>
+  <author>Lanny Lee</author>
+  <keywords>ukang,BP,urion,cordova</keywords>
+  <license>MIT</license>
+  <js-module src="www/ukang-urion-plugin.js" name="ukangUrionPlugin">
+    <clobbers target="UkangUrionPlugin" />
+  </js-module>
+  <platform name="android">
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="UkangUrionPlugin">
+        <param name="android-package" value="com.lec.u_kang.UrionPlugin" />
+      </feature>
+    </config-file>
+    <!--  -->
+    <source-file src="src/android/UrionPlugin.java" target-dir="src/com/lec/u_kang" />
+    <source-file src="src/android/Beans.java" target-dir="src/com/urion" />
+    <source-file src="src/android/BluetoothLeService.java" target-dir="src/com/urion" />
+    <source-file src="src/android/Uuids.java" target-dir="src/com/urion" />
+    <config-file target="AndroidManifest.xml" parent="/manifest">
+      <uses-permission android:name="android.permission.BLUETOOTH"/>
+      <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+      <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    </config-file>
+  </platform>
+</plugin>

@@ -23,6 +23,14 @@ module.exports = [
     "clobbers": [
       "UkangMiscUtils"
     ]
+  },
+  {
+    "id": "ukang-plugin-urion.ukangUrionPlugin",
+    "file": "plugins/ukang-plugin-urion/www/ukang-urion-plugin.js",
+    "pluginId": "ukang-plugin-urion",
+    "clobbers": [
+      "UkangUrionPlugin"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -31,7 +39,8 @@ module.exports.metadata =
   "cordova-plugin-whitelist": "1.3.2",
   "cordova-sqlite-storage": "2.1.0",
   "ukang-plugin-sleepace": "0.3.0",
-  "ukang-plugin-utils": "0.3.0"
+  "ukang-plugin-utils": "0.3.0",
+  "ukang-plugin-urion": "0.4.0"
 };
 // BOTTOM OF METADATA
 });

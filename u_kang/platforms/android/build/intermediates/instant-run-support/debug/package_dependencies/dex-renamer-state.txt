@@ -1,0 +1,19 @@
+#Mon Dec 25 12:22:32 CST 2017
+renamed.5=classes3.dex
+renamed.4=classes5.dex
+renamed.3=classes4.dex
+renamed.2=classes2.dex
+renamed.1=classes6.dex
+renamed.0=classes.dex
+base.5=E\:\\ukang\\dev\\u_kang\\platforms\\android\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\2\\pillowsdk_3.0.0_228d0a4f9fc747fa1a60cbc9efdf1dd8eddfc62f
+base.4=E\:\\ukang\\dev\\u_kang\\platforms\\android\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\2\\sdkcore_3.0.0_78a97bff527fb45db6bae4b1eae9ec24394e540e
+base.3=E\:\\ukang\\dev\\u_kang\\platforms\\android\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\2\\sdkalgorithm_de08015ca080ce2c1e1c938b47d73c4600245dc3
+base.2=E\:\\ukang\\dev\\u_kang\\platforms\\android\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\2\\heartbreathdevicecore_3.0.0_de73057adbfe7034ba92906cd33454373a779e3c
+base.1=E\:\\ukang\\dev\\u_kang\\platforms\\android\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\2\\sqlite-connector_23a805b243fd9a9ad12ebc39be8e37b7f77d7e05
+base.0=E\:\\ukang\\dev\\u_kang\\platforms\\android\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\2\\android-support-v4_ecf0eea11d2c1ad9a552031b476565fd82c576a3
+file.5=E\:\\ukang\\dev\\u_kang\\platforms\\android\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\2\\pillowsdk_3.0.0_228d0a4f9fc747fa1a60cbc9efdf1dd8eddfc62f\\classes.dex
+file.4=E\:\\ukang\\dev\\u_kang\\platforms\\android\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\2\\sdkcore_3.0.0_78a97bff527fb45db6bae4b1eae9ec24394e540e\\classes.dex
+file.3=E\:\\ukang\\dev\\u_kang\\platforms\\android\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\2\\sdkalgorithm_de08015ca080ce2c1e1c938b47d73c4600245dc3\\classes.dex
+file.2=E\:\\ukang\\dev\\u_kang\\platforms\\android\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\2\\heartbreathdevicecore_3.0.0_de73057adbfe7034ba92906cd33454373a779e3c\\classes.dex
+file.1=E\:\\ukang\\dev\\u_kang\\platforms\\android\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\2\\sqlite-connector_23a805b243fd9a9ad12ebc39be8e37b7f77d7e05\\classes.dex
+file.0=E\:\\ukang\\dev\\u_kang\\platforms\\android\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\2\\android-support-v4_ecf0eea11d2c1ad9a552031b476565fd82c576a3\\classes.dex

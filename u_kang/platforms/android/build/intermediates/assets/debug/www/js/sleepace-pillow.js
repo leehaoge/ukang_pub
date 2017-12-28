@@ -67,7 +67,7 @@ define(['text!html/sleepacepillow.html', 'core/fragment', 'ukang-app', 'sleepace
                 connect: function (device, cbSuccess, cbFailure) {
                     intf = new PillowIntf({
                         device: device,
-                        deviceCode: '3-6',
+                        deviceCode: device.deviceCode || '3-6',
                         onData: onData,
                         onStateChanged: onStateChanged,
                     });

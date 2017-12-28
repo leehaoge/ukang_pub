@@ -3,15 +3,6 @@
 
     <item
         is-multidex="false"
-        jar="E:\ukang\dev\u_kang\platforms\android\CordovaLib\build\intermediates\bundles\release\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="1e00ba1760c9a727275e1f2def2dc0e797a4fa27">
-        <dex dex="E:\ukang\dev\u_kang\platforms\android\build\intermediates\pre-dexed\release\classes_a2cea9ea1656f6515c1b2458bfccb0bfa9b82074.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="E:\ukang\dev\u_kang\platforms\android\libs\sqlite-connector.jar"
         jumboMode="false"
         optimize="true"
@@ -21,21 +12,21 @@
     </item>
     <item
         is-multidex="false"
+        jar="E:\ukang\dev\u_kang\platforms\android\libs\android-support-v4.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="efec67655f6db90757faa37201efcee2a9ec3507">
+        <dex dex="E:\ukang\dev\u_kang\platforms\android\build\intermediates\pre-dexed\debug\android-support-v4_ecf0eea11d2c1ad9a552031b476565fd82c576a3.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="E:\ukang\dev\u_kang\platforms\android\CordovaLib\build\intermediates\bundles\debug\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.0"
         sha1="90c24c7c7717de951b29e0777c6cfd206e052684">
         <dex dex="E:\ukang\dev\u_kang\platforms\android\build\intermediates\pre-dexed\debug\classes_202e21cddb68433fb2a39e95d3f8a72da51ffbdf.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="E:\ukang\dev\u_kang\platforms\android\libs\android-support-v4.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="27.0.1"
-        sha1="efec67655f6db90757faa37201efcee2a9ec3507">
-        <dex dex="E:\ukang\dev\u_kang\platforms\android\build\intermediates\pre-dexed\debug\android-support-v4_ecf0eea11d2c1ad9a552031b476565fd82c576a3.jar" />
     </item>
     <item
         is-multidex="false"
@@ -57,6 +48,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="E:\ukang\dev\u_kang\platforms\android\CordovaLib\build\intermediates\bundles\debug\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="90c24c7c7717de951b29e0777c6cfd206e052684">
+        <dex dex="E:\ukang\dev\u_kang\platforms\android\build\intermediates\pre-dexed\debug\classes_202e21cddb68433fb2a39e95d3f8a72da51ffbdf.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="E:\ukang\dev\u_kang\platforms\android\libs\pillowsdk_3.0.0.jar"
         jumboMode="false"
         optimize="true"
@@ -66,21 +66,21 @@
     </item>
     <item
         is-multidex="false"
-        jar="E:\ukang\dev\u_kang\platforms\android\CordovaLib\build\intermediates\bundles\debug\classes.jar"
+        jar="E:\ukang\dev\u_kang\platforms\android\libs\heartbreathdevicecore_3.0.0.jar"
         jumboMode="false"
         optimize="true"
-        revision="27.0.1"
-        sha1="90c24c7c7717de951b29e0777c6cfd206e052684">
-        <dex dex="E:\ukang\dev\u_kang\platforms\android\build\intermediates\pre-dexed\debug\classes_202e21cddb68433fb2a39e95d3f8a72da51ffbdf.jar" />
+        revision="26.0.2"
+        sha1="12195abcf2876634d1ce38238593bbd2ad995770">
+        <dex dex="E:\ukang\dev\u_kang\platforms\android\build\intermediates\pre-dexed\debug\heartbreathdevicecore_3.0.0_de73057adbfe7034ba92906cd33454373a779e3c.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="E:\ukang\dev\u_kang\platforms\android\libs\sdkalgorithm.jar"
+        jar="E:\ukang\dev\u_kang\platforms\android\libs\sqlite-connector.jar"
         jumboMode="false"
         optimize="true"
-        revision="27.0.1"
-        sha1="0c7a20c2d2c962136dd1828aafc7591e01f8c0ee">
-        <dex dex="E:\ukang\dev\u_kang\platforms\android\build\intermediates\pre-dexed\debug\sdkalgorithm_de08015ca080ce2c1e1c938b47d73c4600245dc3.jar" />
+        revision="26.0.2"
+        sha1="76169ab23a4f939925491c6fe186749da5a56ee9">
+        <dex dex="E:\ukang\dev\u_kang\platforms\android\build\intermediates\pre-dexed\debug\sqlite-connector_23a805b243fd9a9ad12ebc39be8e37b7f77d7e05.jar" />
     </item>
     <item
         is-multidex="false"
@@ -93,12 +93,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="E:\ukang\dev\u_kang\platforms\android\libs\heartbreathdevicecore_3.0.0.jar"
+        jar="E:\ukang\dev\u_kang\platforms\android\libs\sdkalgorithm.jar"
         jumboMode="false"
         optimize="true"
-        revision="27.0.1"
-        sha1="12195abcf2876634d1ce38238593bbd2ad995770">
-        <dex dex="E:\ukang\dev\u_kang\platforms\android\build\intermediates\pre-dexed\debug\heartbreathdevicecore_3.0.0_de73057adbfe7034ba92906cd33454373a779e3c.jar" />
+        revision="26.0.2"
+        sha1="0c7a20c2d2c962136dd1828aafc7591e01f8c0ee">
+        <dex dex="E:\ukang\dev\u_kang\platforms\android\build\intermediates\pre-dexed\debug\sdkalgorithm_de08015ca080ce2c1e1c938b47d73c4600245dc3.jar" />
     </item>
     <item
         is-multidex="false"
@@ -111,30 +111,21 @@
     </item>
     <item
         is-multidex="false"
-        jar="E:\ukang\dev\u_kang\platforms\android\libs\sdkcore_3.0.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="27.0.1"
-        sha1="c1881e653474996b6c1a87699890c893a81d7862">
-        <dex dex="E:\ukang\dev\u_kang\platforms\android\build\intermediates\pre-dexed\debug\sdkcore_3.0.0_78a97bff527fb45db6bae4b1eae9ec24394e540e.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="E:\ukang\dev\u_kang\platforms\android\libs\sqlite-connector.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="27.0.1"
-        sha1="76169ab23a4f939925491c6fe186749da5a56ee9">
-        <dex dex="E:\ukang\dev\u_kang\platforms\android\build\intermediates\pre-dexed\debug\sqlite-connector_23a805b243fd9a9ad12ebc39be8e37b7f77d7e05.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="E:\ukang\dev\u_kang\platforms\android\libs\pillowsdk_3.0.0.jar"
         jumboMode="false"
         optimize="true"
-        revision="27.0.1"
+        revision="26.0.2"
         sha1="5fc1bcd30ff109dd2e23866b74d6f616bb2899d7">
         <dex dex="E:\ukang\dev\u_kang\platforms\android\build\intermediates\pre-dexed\debug\pillowsdk_3.0.0_228d0a4f9fc747fa1a60cbc9efdf1dd8eddfc62f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\ukang\dev\u_kang\platforms\android\libs\sdkcore_3.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="c1881e653474996b6c1a87699890c893a81d7862">
+        <dex dex="E:\ukang\dev\u_kang\platforms\android\build\intermediates\pre-dexed\debug\sdkcore_3.0.0_78a97bff527fb45db6bae4b1eae9ec24394e540e.jar" />
     </item>
 
 </items>

@@ -719,6 +719,7 @@ a.uk-link-2:hover {
     margin: 4px 0px 4px 6px;
     border-radius: 0.4em;
     display: inline-block;
+    overflow: hidden;
 }
 
 .uk-device-item img {
@@ -764,6 +765,51 @@ a.uk-link-2:hover {
 .uk-article-group .uk-title-line img {
     width: 95%;
     height: 1px;
+}
+
+.uk-datasource-title {
+    background-color: #EEEEEE;
+}
+
+.uk-datasource-title>div {
+    padding: 10px 3px 10px 3px;
+    font-size: 20px;
+    line-height: 22px;
+}
+
+.uk-selected-datasource {
+    border-bottom: solid 3px #F00;
+}
+
+.ds-device-list {
+    margin: 12px 2px 2px 2px;
+    text-shadow: none;
+    padding: 2px 2px 2px 2px;
+}
+
+.ds-device-item {
+    min-height: 60px;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #777;
+    display: inline-block;
+    padding: 4px 6px;
+    width: 97%;
+    color: #fff;
+}
+
+.ds-device-item h3 {
+    margin-top: 4px;
+    margin-bottom: 3px;
+}
+
+.ds-device-item p {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.uk-valid-device {
+    border: solid 2px #F00;
 }
 
 /* JQuery Mobile modified */
