@@ -21,6 +21,9 @@
     },
     "ukang-plugin-urion": {
       "PACKAGE_NAME": "com.lec.u_kang"
+    },
+    "ukang-plugin-joyelec": {
+      "PACKAGE_NAME": "com.lec.u_kang"
     }
   },
   "dependent_plugins": {}

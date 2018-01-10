@@ -46,5 +46,13 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "ukang-plugin-joyelec": {
+    "source": {
+      "type": "local",
+      "path": "E:\\ukang\\dev\\u_kang\\node_modules\\ukang-plugin-joyelec"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

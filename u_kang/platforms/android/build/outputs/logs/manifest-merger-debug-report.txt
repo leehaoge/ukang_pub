@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:2:1-18:12
+ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:2:1-19:12
 	package
 		ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:2:100-124
 		INJECTED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml
@@ -36,7 +36,7 @@ ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:4:5-67
 	android:name
 		ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:4:22-64
 application
-ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:5:5-13:19
+ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:5:5-14:19
 	android:label
 		ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:5:81-113
 	android:supportsRtl
@@ -75,22 +75,26 @@ service#com.urion.BluetoothLeService
 ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:12:9-64
 	android:name
 		ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:12:18-61
+service#com.joyelectronics.BluetoothLeService
+ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:13:9-73
+	android:name
+		ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:13:18-70
 uses-sdk
-ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:14:5-74
+ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:15:5-74
 MERGED from [org.apache.cordova:CordovaLib:6.3.0:debug] E:\ukang\dev\u_kang\platforms\android\CordovaLib\build\intermediates\bundles\debug\AndroidManifest.xml:25:5-44
 	android:targetSdkVersion
-		ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:14:42-71
+		ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:15:42-71
 	android:minSdkVersion
-		ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:14:15-41
+		ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:15:15-41
 uses-permission#android.permission.BLUETOOTH
-ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:15:5-68
+ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:16:5-68
 	android:name
-		ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:15:22-65
+		ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:16:22-65
 uses-permission#android.permission.BLUETOOTH_ADMIN
-ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:16:5-74
+ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:17:5-74
 	android:name
-		ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:16:22-71
+		ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:17:22-71
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:17:5-81
+ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:18:5-81
 	android:name
-		ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:17:22-78
+		ADDED from E:\ukang\dev\u_kang\platforms\android\AndroidManifest.xml:18:22-78

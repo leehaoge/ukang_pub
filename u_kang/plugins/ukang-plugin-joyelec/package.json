@@ -1,0 +1,13 @@
+{
+    "name": "ukang-plugin-joyelec",
+    "version": "0.4.0",
+    "description": "UKang Plugin for ElecScalesBH",
+    "cordova": {
+      "id": "ukang-plugin-joyelec",
+      "platforms": [
+        "android"
+      ]
+    },
+    "author": "Lanny Lee"
+  }
+  

@@ -55,10 +55,10 @@ public class UrionPlugin extends CordovaPlugin {
     private static enum Action {
         findDevice,
         startGauge,  //<== 启动测量
-        startScan,
-        stopScan,
-        connect,
-        disconnect
+//        startScan,
+//        stopScan,
+//        connect,
+//        disconnect
     }
 
     public static final String DISCONNECTEDBLE = "com.example.urionapp.disconnected";
@@ -83,6 +83,7 @@ public class UrionPlugin extends CordovaPlugin {
 
     private BleBroadCastRecever myBleRecever;
     private boolean isBleseviceRegiste;
+    private boolean isBleReceiverRegiste;
     private int reTryCount;
 
 
@@ -134,6 +135,7 @@ public class UrionPlugin extends CordovaPlugin {
                 if (bluetoothEnabled && !finding) {
                     mLeDevices.clear();
                     mActivity.registerReceiver(myBleRecever, new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
+                    isBleReceiverRegiste = true;
                     finding = true;
                     scanCallbackContext = cbc;
                     initBlue();
@@ -146,6 +148,7 @@ public class UrionPlugin extends CordovaPlugin {
                 reportBluetoothState();
                 bluetoothEnabled = enableBluetooth();
                 if (bluetoothEnabled) {
+                    finding = false;
                     reportBluetoothState();
                     startGauge(args, cbc);
                 } else {
@@ -161,16 +164,23 @@ public class UrionPlugin extends CordovaPlugin {
         return mBluetoothAdapter.getRemoteDevice(address);
     }
 
-    private void sendGaugeError(CallbackContext cbc, int errcode, String errmsg) {
-        JSONObject msg = new JSONObject();
-        try {
-            msg.put("errcode", errcode);
-            msg.put("errmsg", errmsg);
-            cbc.error(msg);
-        } catch (JSONException e) {
-            //this should not happen.
-            e.printStackTrace();
-        }
+    private void sendGaugeError(final CallbackContext cbc, final int errcode, final String errmsg) {
+        mActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (cbc != null) {
+                    JSONObject msg = new JSONObject();
+                    try {
+                        msg.put("errcode", errcode);
+                        msg.put("errmsg", errmsg);
+                        cbc.error(msg);
+                    } catch (JSONException e) {
+                        //this should not happen.
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
     }
 
     private void startGauge(JSONArray args, CallbackContext cbc) throws JSONException {
@@ -183,6 +193,7 @@ public class UrionPlugin extends CordovaPlugin {
                 return;
             }
             mActivity.registerReceiver(myBleRecever, new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
+            isBleReceiverRegiste = true;
             finding = false;
             initBlue();
             startService();
@@ -195,7 +206,10 @@ public class UrionPlugin extends CordovaPlugin {
             @Override
             public void run() {
                 unInitBlue();
-                mActivity.unregisterReceiver(myBleRecever);
+                if (isBleReceiverRegiste) {
+                    mActivity.unregisterReceiver(myBleRecever);
+                    isBleReceiverRegiste = false;
+                }
                 try {
                     reportBluetoothState();
                 } catch (JSONException e) {
@@ -294,16 +308,21 @@ public class UrionPlugin extends CordovaPlugin {
                     //found!
                     finding = false;
                     if (scanCallbackContext != null) {
-                        JSONObject msg = new JSONObject();
-                        try {
-                            msg.put("name", mDevice.getName());
-                            msg.put("address", mDevice.getAddress());
-                            scanCallbackContext.success(msg);
-                            scanCallbackContext = null;
-                        } catch (JSONException e) {
-                            //shouldn't ever happen.
-                            e.printStackTrace();
-                        }
+                        mActivity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                JSONObject msg = new JSONObject();
+                                try {
+                                    msg.put("name", mDevice.getName());
+                                    msg.put("address", mDevice.getAddress());
+                                    scanCallbackContext.success(msg);
+                                    scanCallbackContext = null;
+                                } catch (JSONException e) {
+                                    //shouldn't ever happen.
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
                     }
                     mHandler.postDelayed(new Runnable() {
                         @Override
@@ -390,6 +409,7 @@ public class UrionPlugin extends CordovaPlugin {
     public void unInitBlue() {
         if(isBleseviceRegiste){
             mActivity.unregisterReceiver(getBroadCastReceiver());
+            isBleseviceRegiste = false;
         }
         if (isBindServise) {
             mActivity.unbindService(mServiceConnection);
@@ -515,7 +535,7 @@ public class UrionPlugin extends CordovaPlugin {
                 @Override
                 public void run() {
                     // TODO Auto-generated method stub
-                    boolean isOk = mBluetoothLeService.connect(getDeviceName());// 根据地址通过后台services去连接BLE蓝牙
+                    boolean isOk = mBluetoothLeService.connect(mDevice.getAddress());// 根据地址通过后台services去连接BLE蓝牙
                     L.d(reTryCount+" -----connect ok  ? >"+ isOk);
                     if(!isOk){
                         reTryConected();

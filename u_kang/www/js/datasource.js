@@ -1,8 +1,8 @@
 define(['text!html/datasource.html', 'core/base-module', 'add-device', 'app-source', 'device-source', 'bluetooth-scan.1', 'ukang-devices',
-        'ukang-constants', 'ukang-app', 'device-bp', 'sleepace-pillow.1'
+        'ukang-constants', 'ukang-app', 'device-bp', 'sleepace-pillow.1', 'device-scales'
     ],
     function (tpl, BaseModule, addDevice, appSource, deviceSource, scanBluetoothDevice, deviceManager,
-        CONSTS, ukApp, deviceBp, sleepacePillow) {
+        CONSTS, ukApp, deviceBp, sleepacePillow, deviceScales) {
         'use strict';
 
         var templates = {
@@ -108,6 +108,8 @@ define(['text!html/datasource.html', 'core/base-module', 'add-device', 'app-sour
             "device": function (config) {
                 if (config) {
                     if (CONSTS["DEV_血压计"] === config.type) deviceBp.show(module.el, config);
+                    else
+                    if (CONSTS["DEV_体脂秤"] === config.type) deviceScales.show(module.el, config);
                     else
                     if (CONSTS["DEV_睡眠枕头"] === config.type) {
                         sleepacePillow.connect(config, function () {

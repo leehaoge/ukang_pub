@@ -31,6 +31,14 @@ module.exports = [
     "clobbers": [
       "UkangUrionPlugin"
     ]
+  },
+  {
+    "id": "ukang-plugin-joyelec.ukangJoyelecPlugin",
+    "file": "plugins/ukang-plugin-joyelec/www/ukang-joyelec-plugin.js",
+    "pluginId": "ukang-plugin-joyelec",
+    "clobbers": [
+      "UkangJoyelecPlugin"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -40,7 +48,8 @@ module.exports.metadata =
   "cordova-sqlite-storage": "2.1.0",
   "ukang-plugin-sleepace": "0.3.0",
   "ukang-plugin-utils": "0.3.0",
-  "ukang-plugin-urion": "0.4.0"
+  "ukang-plugin-urion": "0.4.0",
+  "ukang-plugin-joyelec": "0.4.0"
 };
 // BOTTOM OF METADATA
 });

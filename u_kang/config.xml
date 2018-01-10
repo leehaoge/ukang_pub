@@ -27,5 +27,6 @@
     <plugin name="ukang-plugin-sleepace" spec="file:ukang-plugin-sleepace" />
     <plugin name="ukang-plugin-utils" spec="file:ukang-plugin-utils" />
     <plugin name="ukang-plugin-urion" spec="file:ukang-plugin-urion" />
+    <plugin name="ukang-plugin-joyelec" spec="./ukang-plugin-joyelec" />
     <engine name="android" spec="^6.3.0" />
 </widget>

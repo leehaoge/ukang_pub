@@ -29,7 +29,7 @@ define([], function () {
         "DEV_睡眠枕头": 'SleepPillow',
         "DEV_睡眠纽扣": 'SleepButton',
         "DEV_血压计": 'BP',
-        "DEV_体脂秤": 'BodyFatScale',
+        "DEV_体脂秤": 'BodyFatScales',
         "DEV_血糖仪": 'BS',
 
         //-----------------------------

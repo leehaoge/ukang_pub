@@ -31,13 +31,29 @@ function (tpl, Fragment, ukApp, CONSTS, deviceManager) {
     function findPillow(onSuccess, onFailure) {
         if (window.SleepacePillow) {
             window.SleepacePillow.findDevice(
-                function(result) {
+                function(msg) {
                     deviceManager.register(CONSTS['DEV_睡眠枕头'], msg);
                     ukApp.toast('已找到睡眠枕头');
                     if (onSuccess) onSuccess();
                 },
                 function(msg) {
                     if (msg === 'no device found') msg = '找不到睡眠枕头';
+                    ukApp.toast(msg);
+                }
+            );
+        }
+    }
+
+    function findScales(onSuccess, onFailure) {
+        if (window.UkangJoyelecPlugin) {
+            window.UkangJoyelecPlugin.findDevice(
+                function(msg) {
+                    deviceManager.register(CONSTS['DEV_体脂秤'], msg);
+                    ukApp.toast('已找到体脂秤');
+                    if (onSuccess) onSuccess();
+                },
+                function(msg) {
+                    if (msg == 'no device found') msg = '找不到体脂秤';
                     ukApp.toast(msg);
                 }
             );
@@ -61,7 +77,9 @@ function (tpl, Fragment, ukApp, CONSTS, deviceManager) {
 
         if (dataId === CONSTS['DEV_血压计']) findBP(deviceFound);
         else
-        if (dataId === CONSES['DEV_睡眠枕头']) findPillow(deviceFound);
+        if (dataId === CONSTS['DEV_睡眠枕头']) findPillow(deviceFound);
+        else
+        if (dataId === CONSTS['DEV_体脂秤']) findScales(deviceFound);
     }
 
     var pageEl, config = {},
